@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="MainApplication.FXML.Client"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.FXML.Client">
+   <children>
+      <TextArea layoutX="21.0" layoutY="161.0" prefHeight="191.0" prefWidth="558.0" />
+      <Label layoutX="262.0" layoutY="14.0" text="UsChat">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <BorderPane layoutX="21.0" layoutY="49.0" prefHeight="35.0" prefWidth="200.0">
+         <left>
+            <Label text="Name:" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <TextField BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+      <BorderPane layoutX="21.0" layoutY="84.0" prefHeight="35.0" prefWidth="200.0">
+         <left>
+            <Label text="Server:" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <TextField BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+      <BorderPane layoutX="21.0" layoutY="119.0" prefHeight="35.0" prefWidth="200.0">
+         <left>
+            <Label text="Port:" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <TextField BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+      <BorderPane layoutX="21.0" layoutY="352.0" prefHeight="35.0" prefWidth="558.0">
+         <left>
+            <TextField fx:id="MessageTextField" prefHeight="25.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Button fx:id="MessageEnterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </children>
 </AnchorPane>
