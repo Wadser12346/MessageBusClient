@@ -1,4 +1,6 @@
-public class StringMessage {
+import java.io.Serializable;
+
+public class StringMessage implements Serializable {
     private String message;
 
     public StringMessage(String message){

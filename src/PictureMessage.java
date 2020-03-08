@@ -1,3 +1,5 @@
-public class PictureMessage {
+import java.io.Serializable;
+
+public class PictureMessage implements Serializable {
 
 }

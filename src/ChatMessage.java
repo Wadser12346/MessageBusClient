@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 /**
  * This class defines the object that will be sent between the client and the server
  * This class will have a picture and a string component as well as the user information attached
  */
-public class ChatMessage {
+public class ChatMessage implements Serializable {
     private String user;
     private StringMessage stringMessage;
     private PictureMessage pictureMessage;
