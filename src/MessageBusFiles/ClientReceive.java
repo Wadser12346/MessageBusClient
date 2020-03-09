@@ -1,9 +1,6 @@
 package MessageBusFiles;
 
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.Socket;
 import java.sql.SQLOutput;
 
@@ -22,14 +19,16 @@ public class ClientReceive implements Runnable {
 
     @Override
     public void run() {
-        while(true){
-            try {
-                DataInputStream fromServer = new DataInputStream(socket.getInputStream());
+        ObjectInputStream fromServer = null;
+        try {
+            fromServer = new ObjectInputStream(socket.getInputStream());
+            while(true){
                 receivedMessage = fromServer.readUTF();
                 System.out.println(receivedMessage);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

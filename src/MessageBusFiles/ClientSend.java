@@ -1,9 +1,6 @@
 package MessageBusFiles;
 
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -23,9 +20,11 @@ public class ClientSend implements Runnable{
     public void run() {
 
         try {
-            DataOutputStream toServer = new DataOutputStream(connection.getOutputStream());
+//            DataOutputStream toServer = new DataOutputStream(connection.getOutputStream());
+            ObjectOutputStream toServer = new ObjectOutputStream(connection.getOutputStream());
             while(true){
                 System.out.print("Enter a message: ");
+                ChatMessage chatSend = new ChatMessage(new StringMessage(getMessage()));
                 toServer.writeUTF(getMessage());
                 toServer.flush();
                 Thread.sleep(10); //TODO: Temporary solution, need to fix.
