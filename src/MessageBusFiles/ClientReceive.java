@@ -13,7 +13,7 @@ import java.sql.SQLOutput;
 public class ClientReceive implements Runnable {
 
     //TODO: Change to ChatMessage
-    String receivedMessage;
+    ChatMessage receivedMessage;
     Socket socket;
 
     public ClientReceive(Socket socket){
@@ -22,14 +22,14 @@ public class ClientReceive implements Runnable {
 
     @Override
     public void run() {
-        while(true){
-            try {
-                DataInputStream fromServer = new DataInputStream(socket.getInputStream());
-                receivedMessage = fromServer.readUTF();
-                System.out.println(receivedMessage);
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            ObjectInputStream fromServer = new ObjectInputStream(socket.getInputStream());
+            while(true){
+                    receivedMessage = (ChatMessage) fromServer.readObject();
+                    System.out.println(receivedMessage.getStringMessage().toString());
             }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
