@@ -1,3 +1,5 @@
+package MessageBusFiles;
+
 import java.io.Serializable;
 
 public class StringMessage implements Serializable {
