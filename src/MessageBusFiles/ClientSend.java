@@ -3,6 +3,7 @@ package MessageBusFiles;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import MessageFiles.*;
 
 public class ClientSend implements Runnable{
     private Socket connection;
