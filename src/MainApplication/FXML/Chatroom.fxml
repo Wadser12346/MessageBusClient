@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.ChatroomController">
+<AnchorPane fx:id="connectButton" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.ChatroomController">
    <children>
-      <TextArea layoutX="21.0" layoutY="161.0" prefHeight="191.0" prefWidth="558.0" />
+      <TextArea fx:id="textDisplayArea" layoutX="21.0" layoutY="161.0" prefHeight="191.0" prefWidth="558.0" />
       <Label layoutX="262.0" layoutY="14.0" text="UsChat">
          <font>
             <Font size="24.0" />
@@ -47,6 +42,15 @@
          </left>
          <right>
             <Button fx:id="MessageEnterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+      <Button layoutX="248.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Connect" />
+      <BorderPane layoutX="243.0" layoutY="49.0" prefHeight="35.0" prefWidth="256.0">
+         <left>
+            <Label text="Chatroom Name:" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <TextField BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </children>
