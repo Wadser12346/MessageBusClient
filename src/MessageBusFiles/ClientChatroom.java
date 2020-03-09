@@ -52,7 +52,6 @@ public class ClientChatroom implements Runnable{
             Thread serverSendThread = new Thread(new ClientSend(serverConnection));
             serverSendThread.start();
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
