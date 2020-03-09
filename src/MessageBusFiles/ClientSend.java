@@ -16,20 +16,23 @@ public class ClientSend implements Runnable{
     }
 
     public String getMessage(){
-        System.out.print("Enter a message: ");
         return input.nextLine();
     }
 
     @Override
     public void run() {
-        while (true){
-            try {
-                DataOutputStream toServer = new DataOutputStream(connection.getOutputStream());
+
+        try {
+            DataOutputStream toServer = new DataOutputStream(connection.getOutputStream());
+            while(true){
+                System.out.print("Enter a message: ");
                 toServer.writeUTF(getMessage());
                 toServer.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
+                Thread.sleep(10); //TODO: Temporary solution, need to fix.
             }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
+
     }
 }
