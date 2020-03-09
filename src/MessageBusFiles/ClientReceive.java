@@ -1,5 +1,7 @@
 package MessageBusFiles;
 
+import MessageFiles.ChatMessage;
+
 import java.io.*;
 import java.net.Socket;
 import java.sql.SQLOutput;
@@ -19,15 +21,16 @@ public class ClientReceive implements Runnable {
 
     @Override
     public void run() {
-        ObjectInputStream fromServer = null;
+
         try {
-            fromServer = new ObjectInputStream(socket.getInputStream());
+            //fromServer = new ObjectInputStream(socket.getInputStream());
+            ObjectInputStream fromServer = new ObjectInputStream(socket.getInputStream());
             while(true){
-                receivedMessage = fromServer.readUTF();
-                System.out.println(receivedMessage);
+                ChatMessage toDisplay = (ChatMessage)fromServer.readObject();
+                System.out.println(toDisplay.getStringMessage());
             }
 
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
