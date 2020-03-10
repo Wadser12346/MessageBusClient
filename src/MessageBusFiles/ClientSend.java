@@ -1,7 +1,9 @@
 package MessageBusFiles;
 
-import MessageFiles.ChatMessage;
-import MessageFiles.StringMessage;
+
+import MessageTypes.ChatMessage;
+import MessageTypes.ClientInfo;
+import MessageTypes.StringMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,9 +12,11 @@ import java.util.Scanner;
 public class ClientSend implements Runnable{
     private Socket connection;
     private static Scanner input = new Scanner(System.in);
+    private ClientInfo clientInfo;
 
     public ClientSend(Socket connection){
         this.connection = connection;
+        clientInfo = new ClientInfo("client", "chat1");
     }
 
     public String getMessage(){
@@ -28,7 +32,7 @@ public class ClientSend implements Runnable{
             while(true){
                 System.out.print("Enter a message: ");
                 String msg = getMessage();
-                ChatMessage chatSend = new ChatMessage(new StringMessage(msg));
+                ChatMessage chatSend = new ChatMessage(clientInfo,  new StringMessage(msg), null);
 
                 toServer.writeObject(chatSend);
                 toServer.flush();

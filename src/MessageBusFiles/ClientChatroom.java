@@ -1,6 +1,7 @@
 package MessageBusFiles;
 
-import MessageFiles.ChatMessage;
+
+import MessageTypes.ChatMessage;
 
 import java.io.IOException;
 import java.net.Socket;
