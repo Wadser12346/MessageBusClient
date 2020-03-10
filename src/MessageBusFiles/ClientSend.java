@@ -1,5 +1,8 @@
 package MessageBusFiles;
 
+import MessageFiles.ChatMessage;
+import MessageFiles.StringMessage;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -12,18 +15,22 @@ public class ClientSend implements Runnable{
         this.connection = connection;
     }
 
-    public ChatMessage getMessage(){
-        System.out.print("Enter a message: ");
-        return new ChatMessage(new StringMessage(input.nextLine()));
+    public String getMessage(){
+        return input.nextLine();
     }
 
     @Override
     public void run() {
 
         try {
+//            DataOutputStream toServer = new DataOutputStream(connection.getOutputStream());
             ObjectOutputStream toServer = new ObjectOutputStream(connection.getOutputStream());
             while(true){
-                toServer.writeObject(getMessage());
+                System.out.print("Enter a message: ");
+                String msg = getMessage();
+                ChatMessage chatSend = new ChatMessage(new StringMessage(msg));
+
+                toServer.writeObject(chatSend);
                 toServer.flush();
                 Thread.sleep(10); //TODO: Temporary solution, need to fix.
             }
