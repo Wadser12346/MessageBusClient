@@ -16,14 +16,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader chatTabs = new FXMLLoader(getClass().getResource("src/MainApplication/FXML/Client.fxml"));
-        chatTabs.setController(new ClientController());
-        Parent mainClient = chatTabs.load();
-        primaryStage.setTitle("Message Bus");
-        primaryStage.setScene(new Scene(mainClient, 600, 400));
-        primaryStage.show();
+//        Parent root = new FXMLLoader(getClass().getResource("FXML/Client.fxml"));
+//        chatTabs.setController(new ClientController());
+//        Parent mainClient = chatTabs.load();
+//        primaryStage.setTitle("Message Bus");
+//        primaryStage.setScene(new Scene(mainClient, 600, 400));
+//        primaryStage.show();
 
-//        Thread clientChat = new Thread(new ClientChatroom());
-//        clientChat.start();
+        Thread clientChat = new Thread(new ClientChatroom());
+        clientChat.start();
     }
 }
