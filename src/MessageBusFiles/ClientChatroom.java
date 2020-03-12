@@ -16,12 +16,10 @@ import java.util.ArrayList;
 public class ClientChatroom implements Runnable{
     private ArrayList<ChatMessage>chatlog;//TODO: Will we implement serializable to keep this chat log in between sessions? or nah
 
-    private Socket serverConnection;
+
 
     public ClientChatroom() {
     }
-
-
 
     public void sendMessage(ChatMessage chatMessage){
         //Combines the chat message with the username and sends it to the server
@@ -41,22 +39,10 @@ public class ClientChatroom implements Runnable{
         displayMessage(chatMessage);
     }
 
-    public void setServerConnection(String hostname, int port) throws IOException {
-        serverConnection = new Socket(hostname, port);
-    }
+
 
     @Override
     public void run() {
-        try{
-            setServerConnection("localhost", 8000);
-            Thread serverListenThread = new Thread(new ClientReceive(serverConnection));
-            serverListenThread.start();
 
-            Thread serverSendThread = new Thread(new ClientSend(serverConnection));
-            serverSendThread.start();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

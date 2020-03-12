@@ -7,12 +7,11 @@ import MessageTypes.*;
 
 
 /**
- * THis class listens and displays to console
+ * This class listens and displays to console
  */
 public class ClientReceive implements Runnable {
 
     //TODO: Change to ChatMessage
-    String receivedMessage;
     Socket socket;
 
     public ClientReceive(Socket socket){
