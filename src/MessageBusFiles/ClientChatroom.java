@@ -14,8 +14,7 @@ import java.util.ArrayList;
  * It will store a log of the chat
  */
 public class ClientChatroom implements Runnable{
-    private ArrayList<ChatMessage>chatlog;//TODO: Will we implement serializable to keep this chat log in between sessions? or nah
-
+    private ArrayList<ChatMessage>chatlog;
 
 
     public ClientChatroom() {
