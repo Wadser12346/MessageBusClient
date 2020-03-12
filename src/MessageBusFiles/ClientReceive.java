@@ -1,12 +1,10 @@
 package MessageBusFiles;
 
-import MessageTypes.ChatMessage;
 
 import java.io.*;
 import java.net.Socket;
-import MessageFiles.*;
+import MessageTypes.*;
 
-import java.sql.SQLOutput;
 
 /**
  * THis class listens and displays to console
