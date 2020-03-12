@@ -1,9 +1,8 @@
 package MessageBusFiles;
 
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import MessageTypes.ChatMessage;
+
+import java.io.*;
 import java.net.Socket;
 import MessageFiles.*;
 
@@ -15,7 +14,7 @@ import java.sql.SQLOutput;
 public class ClientReceive implements Runnable {
 
     //TODO: Change to ChatMessage
-    ChatMessage receivedMessage;
+    String receivedMessage;
     Socket socket;
 
     public ClientReceive(Socket socket){
@@ -24,12 +23,15 @@ public class ClientReceive implements Runnable {
 
     @Override
     public void run() {
+
         try {
+            //fromServer = new ObjectInputStream(socket.getInputStream());
             ObjectInputStream fromServer = new ObjectInputStream(socket.getInputStream());
             while(true){
-                    receivedMessage = (ChatMessage) fromServer.readObject();
-                    System.out.println(receivedMessage.getStringMessage().toString());
+                ChatMessage toDisplay = (ChatMessage)fromServer.readObject();
+                System.out.println(toDisplay.getStringMessage());
             }
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
