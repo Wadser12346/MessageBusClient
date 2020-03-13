@@ -1,6 +1,7 @@
 package MessageBusFiles;
 
 import MessageTypes.ChatMessage;
+import MessageTypes.Packet;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -21,15 +22,15 @@ public class Client implements Runnable {
     private Socket serverConnection;
 
     //TODO: Change to packet when available
-    private BlockingQueue<ChatMessage> outgoing;
-    private BlockingQueue<ChatMessage> incoming;
+    private BlockingQueue<Packet> outgoing;
+    private BlockingQueue<Packet> incoming;
 
     @Override
     public void run() {
         try{
             setServerConnection("localhost", 8000);
-            send = new ClientSend(serverConnection);
-            receive = new ClientReceive(serverConnection);
+            send = new ClientSend(serverConnection, outgoing);
+            receive = new ClientReceive(serverConnection, incoming);
 
         } catch (IOException e) {
             e.printStackTrace();

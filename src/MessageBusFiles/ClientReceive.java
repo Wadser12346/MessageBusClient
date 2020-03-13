@@ -15,9 +15,9 @@ public class ClientReceive implements Runnable {
 
     //TODO: Change to ChatMessage
     Socket connection;
-    private BlockingQueue<ChatMessage> incoming;
+    private BlockingQueue<Packet> incoming;
 
-    public ClientReceive(Socket connection, BlockingQueue<ChatMessage> incoming){
+    public ClientReceive(Socket connection, BlockingQueue<Packet> incoming){
         this.connection = connection;
         this.incoming = incoming;
         Thread self = new Thread(this);
@@ -31,9 +31,7 @@ public class ClientReceive implements Runnable {
             //fromServer = new ObjectInputStream(socket.getInputStream());
             ObjectInputStream fromServer = new ObjectInputStream(connection.getInputStream());
             while(true){
-                ChatMessage toDisplay = (ChatMessage)fromServer.readObject();
-                System.out.println(toDisplay.getStringMessage());
-
+                incoming.add((Packet)fromServer.readObject());
             }
 
         } catch (IOException | ClassNotFoundException e) {
