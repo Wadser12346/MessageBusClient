@@ -25,10 +25,24 @@ public class ClientPublish implements Runnable {
         // Grabs available messages from incoming and processes it and sends to relevant object
         while(true){
             try {
-                Packet packet = incoming.take();
+                Packet packet = incoming.take();// Get the packet from the incoming queue
+                if (packet.getMessageType() == "ChatMessage"){
+                    ChatMessage message = (ChatMessage)packet.getMessage();// Extract the message from packet
+                    String intendedRoom = packet.getChatroomName();// Get the chatroom the message is for
+                    for (ClientChatroom c : chatrooms){
+                        if (c.getChatroomName() == intendedRoom){// If it finds the correct chatrooms(s)
+                            c.receiveMessage(message);
+                            break;// It found the correct chatroom so no need to go any further
+                        }
+                    }
+                }
 
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            finally {
+                System.out.println("ClientPublish closing.");
             }
         }
     }

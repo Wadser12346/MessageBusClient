@@ -23,7 +23,6 @@ public class Main extends Application {
 //        primaryStage.setScene(new Scene(mainClient, 600, 400));
 //        primaryStage.show();
 
-        Thread clientChat = new Thread(new ClientChatroom());
-        clientChat.start();
+        Client client = new Client();
     }
 }

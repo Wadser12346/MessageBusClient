@@ -36,6 +36,8 @@ public class ClientReceive implements Runnable {
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("ClientReceive closing.");
         }
     }
 }

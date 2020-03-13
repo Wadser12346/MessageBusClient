@@ -30,6 +30,8 @@ public class ClientSend implements Runnable{
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("ClientSend closing.");
         }
     }
 }

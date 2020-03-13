@@ -21,6 +21,7 @@ public class Client implements Runnable {
     private ArrayList<ClientChatroom> chatrooms;
     private Socket serverConnection;
 
+
     //TODO: Change to packet when available
     private BlockingQueue<Packet> outgoing;
     private BlockingQueue<Packet> incoming;
@@ -31,9 +32,12 @@ public class Client implements Runnable {
             setServerConnection("localhost", 8000);
             send = new ClientSend(serverConnection, outgoing);
             receive = new ClientReceive(serverConnection, incoming);
+            chatrooms.add(new ClientChatroom("Chat 1", outgoing));
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Client closing.");
         }
     }
 
