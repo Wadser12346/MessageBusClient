@@ -25,6 +25,7 @@ public class ClientChatroom implements Runnable{
     public ClientChatroom(String chatroomName, BlockingQueue<ChatMessage> outgoing) {
         this.chatroomName = chatroomName;
         this.outgoing = outgoing;
+        chatlog = new ArrayList<>();
         Thread self = new Thread(this);
         self.start();
     }

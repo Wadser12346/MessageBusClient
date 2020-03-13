@@ -24,8 +24,7 @@ public class ClientPublish implements Runnable {
     @Override
     public void run() {
         // Grabs available messages from incoming and processes it and sends to relevant object
-        while(true){
-            try {
+        try {
 //                Packet packet = incoming.take();// Get the packet from the incoming queue
 //                if (packet.getMessageType() == "ChatMessage"){
 //                    ChatMessage message = (ChatMessage)packet.getMessage();// Extract the message from packet
@@ -37,19 +36,20 @@ public class ClientPublish implements Runnable {
 //                        }
 //                    }
 //                }
+            while (true) {
                 ChatMessage message = incoming.take();// Extract the message from packet
 
-                for (ClientChatroom c : chatrooms){
+                for (ClientChatroom c : chatrooms) {
                     c.receiveMessage(message);
                 }
+            }
 
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            finally {
-                System.out.println("ClientPublish closing.");
-            }
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            System.out.println("ClientPublish closing.");
         }
     }
 }
