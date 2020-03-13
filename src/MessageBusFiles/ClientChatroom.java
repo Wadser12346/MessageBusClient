@@ -18,21 +18,18 @@ import java.util.concurrent.BlockingQueue;
 public class ClientChatroom implements Runnable{
     private String chatroomName;
     private ArrayList<ChatMessage>chatlog;
-    private BlockingQueue<Packet> outgoing;
+    private BlockingQueue<ChatMessage> outgoing;
+    //private BlockingQueue<Packet> outgoing;
 
 
-    public ClientChatroom(String chatroomName, BlockingQueue<Packet> outgoing) {
+    public ClientChatroom(String chatroomName, BlockingQueue<ChatMessage> outgoing) {
         this.chatroomName = chatroomName;
         this.outgoing = outgoing;
         Thread self = new Thread(this);
         self.start();
     }
 
-    public void sendMessage(ChatMessage chatMessage){
-        //Combines the chat message with the username and sends it to the server
-    }
-
-    /**
+     /**
      * displayMessage(String Message)
      * @param chatMessage: Display the MessageBusFiles.ChatMessage object
      */
@@ -59,12 +56,12 @@ public class ClientChatroom implements Runnable{
 
     @Override
     public void run() {
-        int i = 0;
         Scanner input = new Scanner(System.in);
-        while (i < 10){
+        while (true){
+            System.out.print("Enter Message: ");
             String message = input.nextLine();
-            outgoing.add(new Packet("", chatroomName,new ChatMessage(new StringMessage(message)), "ChatMessage"));
-            ++i;
+            //outgoing.add(new Packet("", chatroomName,new ChatMessage(new StringMessage(message)), "ChatMessage"));
+            outgoing.add(new ChatMessage(new StringMessage(message)));
         }
     }
 }

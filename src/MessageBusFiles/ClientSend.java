@@ -11,9 +11,10 @@ import java.util.concurrent.BlockingQueue;
 
 public class ClientSend implements Runnable{
     private Socket connection;
-    private BlockingQueue<Packet> outgoing;
+    //private BlockingQueue<Packet> outgoing;
+    private BlockingQueue<ChatMessage> outgoing;
 
-    public ClientSend(Socket connection, BlockingQueue<Packet> outgoing){
+    public ClientSend(Socket connection, BlockingQueue<ChatMessage> outgoing){
         this.connection = connection;//Reference to socket connection
         this.outgoing = outgoing;// Reference to outgoing blocking queue
         Thread self = new Thread(this);

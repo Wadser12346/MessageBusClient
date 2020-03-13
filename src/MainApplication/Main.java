@@ -24,5 +24,6 @@ public class Main extends Application {
 //        primaryStage.show();
 
         Client client = new Client();
+        client.main();
     }
 }
