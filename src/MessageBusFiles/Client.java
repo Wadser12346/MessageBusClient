@@ -1,5 +1,6 @@
 package MessageBusFiles;
 
+import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageTypes.ChatMessage;
 import MessageTypes.Packet;
 
@@ -22,7 +23,7 @@ public class Client {
     private ClientPublish publish;
     private ArrayList<ClientChatroom> chatrooms;
     private Socket serverConnection;
-
+    private boolean run;// This is so the disconnect function can set this to true and stop the while loop in run
 
     //TODO: Change to packet when available
 //    private BlockingQueue<Packet> outgoing;
@@ -34,16 +35,18 @@ public class Client {
         outgoing = new ArrayBlockingQueue<>(100);
         incoming = new ArrayBlockingQueue<>(100);
         chatrooms = new ArrayList<>();
+        run = false;
     }
 
     public void main() {
+        run = true;
         try{
             setServerConnection("localhost", 8000);
             send = new ClientSend(serverConnection, outgoing);
             receive = new ClientReceive(serverConnection, incoming);
             publish = new ClientPublish(chatrooms, incoming, this);
             chatrooms.add(new ClientChatroom("Chat 1", outgoing));
-            while(true){
+            while(run){
 
             }
 
@@ -56,5 +59,9 @@ public class Client {
 
     public void setServerConnection(String hostname, int port) throws IOException {
         serverConnection = new Socket(hostname, port);
+    }
+
+    public void setServerConnection(ConnectionAttempt attempt) throws IOException {
+        setServerConnection(attempt.getServerName(), Integer.parseInt(attempt.getPortNumber()));
     }
 }

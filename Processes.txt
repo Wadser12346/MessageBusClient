@@ -1,0 +1,11 @@
+Bootup:
+Main uses Client.fxml to create the UI window
+Main instantiates and activates a Client object on its own thread
+
+Connection Attempt:
+User types server name, port number, and username into fields on UI
+User hits connect button
+ClientController takes text from those fields and packages it into a ConnectionAttempt object
+ClientController packages it in an InternalPacket object and sends to Main
+Main then reads the packet, and determines that it is a ConnectionAttempt object.
+Main gives the ConnectionAttempt to

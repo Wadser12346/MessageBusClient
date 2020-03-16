@@ -3,17 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.ClientController">
+<AnchorPane fx:id="clientMain" prefHeight="247.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.ClientController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <Button fx:id="connectButton" layoutX="175.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Connect" />
+      <TextField fx:id="serverName" layoutX="14.0" layoutY="51.0" promptText="Enter Server Name" />
+      <TextField fx:id="portNumber" layoutX="14.0" layoutY="101.0" promptText="Enter Port Number" />
+      <Label layoutX="15.0" layoutY="26.0" text="Server Name" />
+      <Label layoutX="14.0" layoutY="80.0" text="Port Number" />
+      <Label layoutX="15.0" layoutY="135.0" text="Username:" />
+      <TextField fx:id="username" layoutX="14.0" layoutY="152.0" promptText=" Enter Username" />
+      <Button fx:id="disconnectButton" layoutX="175.0" layoutY="51.0" mnemonicParsing="false" text="Disconnect" />
+      <ChoiceBox fx:id="chatroomSelect" layoutX="14.0" layoutY="200.0" prefWidth="150.0" />
+      <Button fx:id="openChatroom" layoutX="187.0" layoutY="200.0" mnemonicParsing="false" text="Open" />
    </children>
 </AnchorPane>
