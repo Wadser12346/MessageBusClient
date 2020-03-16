@@ -8,4 +8,6 @@ User hits connect button
 ClientController takes text from those fields and packages it into a ConnectionAttempt object
 ClientController packages it in an InternalPacket object and sends to Main
 Main then reads the packet, and determines that it is a ConnectionAttempt object.
-Main gives the ConnectionAttempt to
+Main gives the ConnectionAttempt to the client
+Client will attempt to connect using the information
+If it is successful, then client.main() will be called

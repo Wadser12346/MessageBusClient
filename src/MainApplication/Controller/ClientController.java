@@ -28,20 +28,24 @@ public class ClientController extends Observable {
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                      if (!serverName.getText().isBlank() && !portNumber.getText().isBlank()){
-                            // Get username
-                            String user = username.getText();
-                            //Check if empty
-                            if (user.isBlank()){
-                                  user = "Anonymous";
-                                  username.setPromptText("Anonymous");
-                            }
-                            setChanged();
-                            notifyObservers(new InternalPacket("ConnectionAttempt", new ConnectionAttempt(serverName.getText(), portNumber.getText(), user)));
-                      }
-
-
+                  attemptConnection();
                 }
           });
+      }
+
+      private void attemptConnection(){
+            String server = serverName.getText();
+            String port = portNumber.getText();
+            if (!server.isBlank() && !port.isBlank()){
+                  // Get username
+                  String user = username.getText();
+                  //Check if empty
+                  if (user.isBlank()){
+                        user = "Anonymous";
+                        username.setPromptText("Anonymous");
+                  }
+                  setChanged();
+                  notifyObservers(new InternalPacket("ConnectionAttempt", new ConnectionAttempt(serverName.getText(), portNumber.getText(), user)));
+            }
       }
 }

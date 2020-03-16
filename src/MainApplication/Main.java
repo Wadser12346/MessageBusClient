@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Main extends Application  implements Observer {
+public class Main extends Application implements Observer {
     Client client;
     public static void main(String[] args) {
         launch(args);
@@ -23,13 +23,15 @@ public class Main extends Application  implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        client = new Client();
         FXMLLoader chat = new FXMLLoader(getClass().getResource("FXML/Client.fxml"));
         Parent mainClient = chat.load();
         primaryStage.setTitle("Messenger");
         primaryStage.setScene(new Scene(mainClient));
         primaryStage.show();
+        ((ClientController)chat.getController()).addObserver(this);
 
-        client = new Client();
+
     }
 
     @Override
@@ -38,6 +40,7 @@ public class Main extends Application  implements Observer {
         if (packet.getPacketType().equals("ConnectionAttempt")){
             // Send to client
             try{
+                System.out.println("Received ConnectionAttempt");
                 client.setServerConnection((ConnectionAttempt) packet.getPacket());
                 client.main();
             } catch (IOException e) {

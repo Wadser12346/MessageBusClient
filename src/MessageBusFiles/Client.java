@@ -39,9 +39,10 @@ public class Client {
     }
 
     public void main() {
+        System.out.println("Starting Client Main");
         run = true;
         try{
-            setServerConnection("localhost", 8000);
+            //setServerConnection("localhost", 8000);
             send = new ClientSend(serverConnection, outgoing);
             receive = new ClientReceive(serverConnection, incoming);
             publish = new ClientPublish(chatrooms, incoming, this);
@@ -50,8 +51,6 @@ public class Client {
 
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } finally {
             System.out.println("Client closing.");
         }
