@@ -35,15 +35,15 @@ public class ClientUIMain extends Application implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         InternalPacket packet = (InternalPacket)arg;
-        if (packet.getPacketType().equals("ConnectionAttempt")){
-            // Send to client
-            try{
-                System.out.println("Received ConnectionAttempt");
-                client.setServerConnection((ConnectionAttempt) packet.getPacket());
-                client.main();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            if (packet.getPacketType().equals("ConnectionAttempt")){
+                // Send to client
+                try{
+                    System.out.println("Received ConnectionAttempt");
+                    client.setServerConnection((ConnectionAttempt) packet.getPacket());
+                    client.main();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 }

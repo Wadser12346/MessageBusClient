@@ -25,7 +25,7 @@
             <TextField fx:id="MessageTextField" prefHeight="105.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Button fx:id="MessageEnterButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
+            <Button fx:id="messageEnterButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
       <BorderPane layoutX="325.0" layoutY="49.0" prefHeight="35.0" prefWidth="249.0">
