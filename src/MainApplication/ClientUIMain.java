@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Main extends Application implements Observer {
+public class ClientUIMain extends Application implements Observer {
     Client client;
     public static void main(String[] args) {
         launch(args);
@@ -30,8 +30,6 @@ public class Main extends Application implements Observer {
         primaryStage.setScene(new Scene(mainClient));
         primaryStage.show();
         ((ClientController)chat.getController()).addObserver(this);
-
-
     }
 
     @Override

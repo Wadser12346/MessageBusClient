@@ -3,11 +3,19 @@ Main uses Client.fxml to create the UI window
 Main instantiates and activates a Client object on its own thread
 
 Connection Attempt:
-User types server name, port number, and username into fields on UI
-User hits connect button
+User types server name, port number, and username into fields on Client UI
+User hits Connect button
 ClientController takes text from those fields and packages it into a ConnectionAttempt object
-ClientController packages it in an InternalPacket object and sends to Main
-Main then reads the packet, and determines that it is a ConnectionAttempt object.
-Main gives the ConnectionAttempt to the client
+ClientController packages that in an InternalPacket object and sends to ClientUIMain
+ClientUIMain then reads the packet, and determines that it is a ConnectionAttempt object.
+ClientUIMain gives the ConnectionAttempt to the Client object
 Client will attempt to connect using the information
-If it is successful, then client.main() will be called
+If it is successful, then client.main() will be called.
+
+Open Chatwindow for existing chatroom
+User from Client UI will select a chatroom from a drop down list and click the button open
+Client UI will notify ClientUIMain that user wishes to open a new chatwindow.
+ClientUIMain will inform its Client object that a new chat window needs to be opened for a specific chatroom
+Client will then create a new ChatroomObject in its ArrayList and open a new ChatroomUI
+
+//TODO: Open ChatWindow for Chatroom that does not yet exist

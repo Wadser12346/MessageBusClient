@@ -6,8 +6,8 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.ChatroomController">
    <children>
-      <TextArea fx:id="textDisplayArea" layoutX="21.0" layoutY="161.0" prefHeight="191.0" prefWidth="558.0" />
-      <Label layoutX="262.0" layoutY="14.0" text="UsChat">
+      <TextArea fx:id="textDisplayArea" layoutX="21.0" layoutY="93.0" prefHeight="219.0" prefWidth="558.0" />
+      <Label layoutX="249.0" layoutY="14.0" text="UsChat">
          <font>
             <Font size="24.0" />
          </font>
@@ -20,32 +20,15 @@
             <TextField BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
-      <BorderPane layoutX="21.0" layoutY="84.0" prefHeight="35.0" prefWidth="200.0">
+      <BorderPane layoutX="21.0" layoutY="316.0" prefHeight="71.0" prefWidth="558.0">
          <left>
-            <Label text="Server:" BorderPane.alignment="CENTER" />
+            <TextField fx:id="MessageTextField" prefHeight="105.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <TextField BorderPane.alignment="CENTER" />
+            <Button fx:id="MessageEnterButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
-      <BorderPane layoutX="21.0" layoutY="119.0" prefHeight="35.0" prefWidth="200.0">
-         <left>
-            <Label text="Port:" BorderPane.alignment="CENTER" />
-         </left>
-         <right>
-            <TextField BorderPane.alignment="CENTER" />
-         </right>
-      </BorderPane>
-      <BorderPane layoutX="21.0" layoutY="352.0" prefHeight="35.0" prefWidth="558.0">
-         <left>
-            <TextField fx:id="MessageTextField" prefHeight="25.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
-         </left>
-         <right>
-            <Button fx:id="MessageEnterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
-         </right>
-      </BorderPane>
-      <Button layoutX="248.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Connect" />
-      <BorderPane layoutX="243.0" layoutY="49.0" prefHeight="35.0" prefWidth="256.0">
+      <BorderPane layoutX="325.0" layoutY="49.0" prefHeight="35.0" prefWidth="249.0">
          <left>
             <Label text="Chatroom Name:" BorderPane.alignment="CENTER" />
          </left>
