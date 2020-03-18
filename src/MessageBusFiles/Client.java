@@ -44,7 +44,6 @@ public class Client extends Observable implements Observer, Runnable {
         System.out.println("Starting Client Main");
 
         try{
-            //setServerConnection("localhost", 8000);
             send = new ClientSend(serverConnection, outgoing);
             receive = new ClientReceive(serverConnection, incoming);
             publish = new ClientPublish(chatrooms, incoming, this);
@@ -61,7 +60,8 @@ public class Client extends Observable implements Observer, Runnable {
     @Override
     public void run() {
         run = true;
-        //test();
+        //Requesting ChatroomList
+        outgoing.add(new Packet("Client", "N/A", new RequestChatroom(), "RequestChatroom"));
         while(run){
 
         }
