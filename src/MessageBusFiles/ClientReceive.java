@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
-import MessageTypes.*;
+import CS4B.Messages.*;
 
 
 /**

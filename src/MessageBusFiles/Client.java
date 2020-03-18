@@ -1,8 +1,7 @@
 package MessageBusFiles;
 
+import CS4B.Messages.*;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
-import MessageTypes.ChatMessage;
-import MessageTypes.Packet;
 
 import java.io.IOException;
 import java.net.Socket;

@@ -1,6 +1,6 @@
 package MessageBusFiles;
 
-import MessageTypes.*;
+import CS4B.Messages.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;

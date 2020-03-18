@@ -1,7 +1,7 @@
 package MessageBusFiles;
 
 
-import MessageTypes.*;
+import CS4B.Messages.*;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
