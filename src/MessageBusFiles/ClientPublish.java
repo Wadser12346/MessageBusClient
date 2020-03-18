@@ -41,8 +41,9 @@ public class ClientPublish extends Observable implements Runnable {
                 }
                 else if(packet.getMessageType().equals("ChatroomList")){
                     //Send this list to Client so it can update the UI
+                    System.out.println("Sending ChatroomList to Client");
                     setChanged();
-                    notifyObservers(new InternalPacket("ChatroomList", packet.getMessage()));
+                    notifyObservers(new InternalPacket(packet.getMessageType(), packet.getMessage()));
                 }
             }
 //                ChatMessage message = incoming.take();// Extract the message from packet

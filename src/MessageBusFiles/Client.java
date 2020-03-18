@@ -19,7 +19,7 @@ import java.util.concurrent.BlockingQueue;
  *  one thread for receiving messages
  *  a list of chatrooms
  */
-public class Client extends Observable implements Observer {
+public class Client extends Observable implements Observer, Runnable {
     private ClientSend send;
     private ClientReceive receive;
     private ClientPublish publish;
@@ -42,7 +42,7 @@ public class Client extends Observable implements Observer {
 
     public void main() {
         System.out.println("Starting Client Main");
-        run = true;
+
         try{
             //setServerConnection("localhost", 8000);
             send = new ClientSend(serverConnection, outgoing);
@@ -50,12 +50,20 @@ public class Client extends Observable implements Observer {
             publish = new ClientPublish(chatrooms, incoming, this);
             publish.addObserver(this);
             chatrooms.add(new ClientChatroom("Chat 1", outgoing));
-            while(run){
-
-            }
+            Thread self = new Thread(this);
+            self.start();
 
         } finally {
             System.out.println("Client closing.");
+        }
+    }
+
+    @Override
+    public void run() {
+        run = true;
+        //test();
+        while(run){
+
         }
     }
 
@@ -76,9 +84,17 @@ public class Client extends Observable implements Observer {
 
     }
 
+    public void test(){
+        System.out.println("Conducting Tests");
+        receive.test();
+    }
+
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("Passing Packet onto ClientUI");
         setChanged();
         notifyObservers(arg);//Pass it on to ClientUI
     }
+
+
 }

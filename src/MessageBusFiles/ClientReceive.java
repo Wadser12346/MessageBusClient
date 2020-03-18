@@ -26,6 +26,7 @@ public class ClientReceive implements Runnable {
     }
 
     public void test(){
+        System.out.println("Spoofing chatroom incoming");
         ArrayList<String>chats = new ArrayList<>();
         chats.add("CS4A");
         chats.add("CS4B");

@@ -2,11 +2,14 @@ package MainApplication.Controller;
 import CS4B.Messages.ChatroomList;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
@@ -27,11 +30,11 @@ public class ClientController extends Observable {
       TextField username;
 
       @FXML
-      ChoiceBox<String> chatroomSelect;
+      ComboBox<String> chatroomSelect;
 
       public void initialize(){
             chatroomSelect.getItems().add("New Chatroom");
-            chatroomSelect.getSelectionModel().selectFirst();
+            //chatroomSelect.getSelectionModel().selectFirst();
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -57,7 +60,14 @@ public class ClientController extends Observable {
       }
 
       public void updateChatroomLists(ArrayList<String>chatrooms){
-            chatroomSelect.getItems().addAll(chatrooms);
+            Platform.runLater(new Runnable() {
+                  @Override
+                  public void run() {
+                        System.out.println("Updating Chatroom List");
+                        chatroomSelect.getItems().addAll(chatrooms);
+                        chatroomSelect.getSelectionModel().selectFirst();
+                  }
+            });
       }
 
       public void updateChatroomLists(ChatroomList list){

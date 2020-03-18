@@ -13,7 +13,7 @@
       <Label layoutX="15.0" layoutY="135.0" text="Username:" />
       <TextField fx:id="username" layoutX="14.0" layoutY="152.0" promptText=" Enter Username" />
       <Button fx:id="disconnectButton" layoutX="175.0" layoutY="51.0" mnemonicParsing="false" text="Disconnect" />
-      <ChoiceBox fx:id="chatroomSelect" layoutX="14.0" layoutY="200.0" prefWidth="150.0" />
+      <ComboBox fx:id="chatroomSelect" layoutX="14.0" layoutY="200.0" prefWidth="150.0" />
       <Button fx:id="openChatroom" layoutX="187.0" layoutY="200.0" mnemonicParsing="false" text="Open" />
    </children>
 </AnchorPane>
