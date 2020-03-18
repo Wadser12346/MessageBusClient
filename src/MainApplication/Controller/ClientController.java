@@ -3,6 +3,7 @@ import CS4B.Messages.ChatroomList;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
 
+import MessageBusFiles.InternalWrappers.OpenChat;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,6 +32,8 @@ public class ClientController extends Observable {
 
       @FXML
       ComboBox<String> chatroomSelect;
+
+      private ArrayList<ChatroomController> openChats;
 
       public void initialize(){
             chatroomSelect.getItems().add("New Chatroom");
@@ -72,5 +75,12 @@ public class ClientController extends Observable {
 
       public void updateChatroomLists(ChatroomList list){
             updateChatroomLists(list.getChatrooms());
+      }
+
+      private void openChatroomWindow(String chatroomName){
+            setChanged();
+            notifyObservers(new InternalPacket("OpenChat",new OpenChat(chatroomName)));// Tell client to open a chat on the backend
+
+
       }
 }
