@@ -1,6 +1,8 @@
 package MessageBusFiles;
 
 import CS4B.Messages.*;
+import MessageBusFiles.InternalWrappers.SendMessage;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
@@ -43,10 +45,14 @@ public class ClientChatroom implements Runnable{
         return "Chatroom: " + chatroomName;
     }
 
-    public void receiveMessage(ChatMessage chatMessage){
+    public void receiveMessage(ChatMessage message){
         //Add the message to the log
-        chatlog.add(chatMessage);
-        displayMessage(chatMessage);
+        chatlog.add(message);
+        displayMessage(message);
+    }
+
+    public void sendMessage(SendMessage message){
+        outgoing.add(new Packet(message.getUsername(), message.getChatroomName(), message.getMessage(), "ChatMessage"));
     }
 
     @Override

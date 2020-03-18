@@ -3,6 +3,7 @@ package MessageBusFiles;
 import CS4B.Messages.*;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.SendMessage;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -83,6 +84,18 @@ public class Client extends Observable implements Observer, Runnable {
     public void updateChatroomUI(){
 
     }
+
+    public void sendMessage(SendMessage message){
+        String chatroomName = message.getChatroomName();
+        for(ClientChatroom c : chatrooms){
+            if (c.getChatroomName().equals(chatroomName)){
+                c.sendMessage(message);
+                break;
+            }
+        }
+    }
+
+
 
     public void test(){
         System.out.println("Conducting Tests");

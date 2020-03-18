@@ -1,5 +1,10 @@
 package MainApplication.Controller;
 
+import CS4B.Messages.ChatMessage;
+import CS4B.Messages.Packet;
+import CS4B.Messages.StringMessage;
+import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.SendMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +20,9 @@ public class ChatroomController extends Observable {
     @FXML
     TextField messageTextField;
 
+    String chatroomName;
+    String username;
+
     public void initialize(){
         messageEnterButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -27,6 +35,16 @@ public class ChatroomController extends Observable {
     public void sendMessage(){
         String message = messageTextField.getText();
         setChanged();
-        notifyObservers(message);
+        notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, new ChatMessage(new StringMessage(message)))));
     }
+
+    public String getChatroomName() {
+        return chatroomName;
+    }
+
+    public void setChatroomName(String chatroomName) {
+        this.chatroomName = chatroomName;
+    }
+
+
 }

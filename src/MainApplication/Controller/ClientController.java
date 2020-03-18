@@ -8,15 +8,21 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-public class ClientController extends Observable {
+public class ClientController extends Observable implements Observer {
       @FXML
       Button disconnectButton;
       @FXML
@@ -77,10 +83,24 @@ public class ClientController extends Observable {
             updateChatroomLists(list.getChatrooms());
       }
 
-      private void openChatroomWindow(String chatroomName){
+      private void openChatroomWindow(String chatroomName) throws IOException {
             setChanged();
             notifyObservers(new InternalPacket("OpenChat",new OpenChat(chatroomName)));// Tell client to open a chat on the backend
+            FXMLLoader chatroom = new FXMLLoader(getClass().getResource("FXML/Chatroom.fxml"));
+            Parent chatroomWindow = chatroom.load();
+            Stage stage = new Stage();
+            stage.setTitle(chatroomName);
+            stage.setScene(new Scene(chatroomWindow, 450, 450));
+            stage.show();
+            ChatroomController controller = (ChatroomController)chatroom.getController();
+            controller.setChatroomName(chatroomName);
+            controller.addObserver(this);
+            openChats.add(controller);
+      }
 
-
+      @Override
+      public void update(Observable o, Object arg) {
+            setChanged();
+            notifyObservers(arg);
       }
 }

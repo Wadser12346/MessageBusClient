@@ -6,6 +6,7 @@ import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.SendMessage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,6 +52,9 @@ public class ClientUI extends Application implements Observer {
             }
             else if(packet.getPacketType().equals("ChatroomList")){
                 clientController.updateChatroomLists((ChatroomList)packet.getPacket());//Tell the controller to update the list
+            }
+            else if (packet.getPacketType().equals("SendMessage")){
+                client.sendMessage((SendMessage)packet.getPacket());
             }
     }
 }
