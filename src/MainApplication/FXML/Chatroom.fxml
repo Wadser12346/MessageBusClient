@@ -22,7 +22,7 @@
       </BorderPane>
       <BorderPane layoutX="21.0" layoutY="316.0" prefHeight="71.0" prefWidth="558.0">
          <left>
-            <TextField fx:id="MessageTextField" prefHeight="105.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
+            <TextField fx:id="messageTextField" prefHeight="105.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
             <Button fx:id="messageEnterButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />

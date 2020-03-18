@@ -7,6 +7,7 @@ import MessageTypes.Packet;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
@@ -17,7 +18,7 @@ import java.util.concurrent.BlockingQueue;
  *  one thread for receiving messages
  *  a list of chatrooms
  */
-public class Client {
+public class Client extends Observable {
     private ClientSend send;
     private ClientReceive receive;
     private ClientPublish publish;
@@ -62,5 +63,14 @@ public class Client {
 
     public void setServerConnection(ConnectionAttempt attempt) throws IOException {
         setServerConnection(attempt.getServerName(), Integer.parseInt(attempt.getPortNumber()));
+    }
+
+    public void startChatroom(String chatroomName){
+        //TODO: Check for already open classrooms
+        chatrooms.add(new ClientChatroom(chatroomName, outgoing));
+    }
+
+    public void updateChatroomUI(){
+
     }
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ClientUIMain extends Application implements Observer {
+public class ClientUI extends Application implements Observer {
     Client client;
     public static void main(String[] args) {
         launch(args);

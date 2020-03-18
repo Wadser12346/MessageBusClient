@@ -5,9 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class ClientController extends Observable {
@@ -24,7 +25,12 @@ public class ClientController extends Observable {
       @FXML
       TextField username;
 
+      @FXML
+      ChoiceBox<String> chatroomSelect;
+
       public void initialize(){
+            chatroomSelect = new ChoiceBox<String>();
+            chatroomSelect.getItems().add("New Chatroom");
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -47,5 +53,9 @@ public class ClientController extends Observable {
                   setChanged();
                   notifyObservers(new InternalPacket("ConnectionAttempt", new ConnectionAttempt(serverName.getText(), portNumber.getText(), user)));
             }
+      }
+
+      public void updateChatroomLists(ArrayList<String>chatrooms){
+            chatroomSelect.getItems().addAll(chatrooms);
       }
 }

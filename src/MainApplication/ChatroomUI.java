@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ChatroomUIMain extends Application implements Observer {
+public class ChatroomUI extends Application implements Observer {
     private String chatroomName;
 
-    public ChatroomUIMain(String chatroomName){
+    public ChatroomUI(String chatroomName){
         this.chatroomName = chatroomName;
     }
 

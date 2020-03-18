@@ -53,8 +53,6 @@ public class ClientChatroom implements Runnable{
         displayMessage(chatMessage);
     }
 
-
-
     @Override
     public void run() {
         Scanner input = new Scanner(System.in);
