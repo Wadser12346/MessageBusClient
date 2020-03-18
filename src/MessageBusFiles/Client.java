@@ -2,11 +2,13 @@ package MessageBusFiles;
 
 import CS4B.Messages.*;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
+import MessageBusFiles.InternalWrappers.InternalPacket;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
@@ -17,7 +19,7 @@ import java.util.concurrent.BlockingQueue;
  *  one thread for receiving messages
  *  a list of chatrooms
  */
-public class Client extends Observable {
+public class Client extends Observable implements Observer {
     private ClientSend send;
     private ClientReceive receive;
     private ClientPublish publish;
@@ -28,8 +30,8 @@ public class Client extends Observable {
     //TODO: Change to packet when available
 //    private BlockingQueue<Packet> outgoing;
 //    private BlockingQueue<Packet> incoming;
-    private BlockingQueue<ChatMessage> outgoing;
-    private BlockingQueue<ChatMessage> incoming;
+    private BlockingQueue<Packet> outgoing;
+    private BlockingQueue<Packet> incoming;
 
     public Client(){
         outgoing = new ArrayBlockingQueue<>(100);
@@ -46,6 +48,7 @@ public class Client extends Observable {
             send = new ClientSend(serverConnection, outgoing);
             receive = new ClientReceive(serverConnection, incoming);
             publish = new ClientPublish(chatrooms, incoming, this);
+            publish.addObserver(this);
             chatrooms.add(new ClientChatroom("Chat 1", outgoing));
             while(run){
 
@@ -71,5 +74,11 @@ public class Client extends Observable {
 
     public void updateChatroomUI(){
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        setChanged();
+        notifyObservers(arg);//Pass it on to ClientUI
     }
 }

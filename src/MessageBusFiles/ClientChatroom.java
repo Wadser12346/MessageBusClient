@@ -14,11 +14,11 @@ import java.util.concurrent.BlockingQueue;
 public class ClientChatroom implements Runnable{
     private String chatroomName;
     private ArrayList<ChatMessage>chatlog;
-    private BlockingQueue<ChatMessage> outgoing;
+    private BlockingQueue<Packet> outgoing;
     //private BlockingQueue<Packet> outgoing;
 
 
-    public ClientChatroom(String chatroomName, BlockingQueue<ChatMessage> outgoing) {
+    public ClientChatroom(String chatroomName, BlockingQueue<Packet> outgoing) {
         this.chatroomName = chatroomName;
         this.outgoing = outgoing;
         chatlog = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ClientChatroom implements Runnable{
             System.out.print("Enter Message: ");
             String message = input.nextLine();
             //outgoing.add(new Packet("", chatroomName,new ChatMessage(new StringMessage(message)), "ChatMessage"));
-            outgoing.add(new ChatMessage(new StringMessage(message)));
+            outgoing.add(new Packet("Client", chatroomName, new ChatMessage(new StringMessage(message)), "ChatMessage"));
         }
     }
 }

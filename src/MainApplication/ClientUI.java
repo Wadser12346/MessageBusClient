@@ -1,5 +1,6 @@
 package MainApplication;
 
+import CS4B.Messages.ChatroomList;
 import MainApplication.Controller.ChatroomController;
 import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
@@ -17,6 +18,7 @@ import java.util.Observer;
 
 public class ClientUI extends Application implements Observer {
     Client client;
+    ClientController clientController;
     public static void main(String[] args) {
         launch(args);
     }
@@ -24,12 +26,14 @@ public class ClientUI extends Application implements Observer {
     @Override
     public void start(Stage primaryStage) throws Exception {
         client = new Client();
+        client.addObserver(this);
         FXMLLoader chat = new FXMLLoader(getClass().getResource("FXML/Client.fxml"));
         Parent mainClient = chat.load();
         primaryStage.setTitle("Messenger");
         primaryStage.setScene(new Scene(mainClient));
         primaryStage.show();
-        ((ClientController)chat.getController()).addObserver(this);
+        clientController = (ClientController)chat.getController();
+        clientController.addObserver(this);
     }
 
     @Override
@@ -44,6 +48,9 @@ public class ClientUI extends Application implements Observer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-        }
+            }
+            else if(packet.getPacketType().equals("ChatroomList")){
+                clientController.updateChatroomLists((ChatroomList)packet.getPacket());//Tell the controller to update the list
+            }
     }
 }

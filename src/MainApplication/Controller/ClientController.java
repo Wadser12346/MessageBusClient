@@ -1,4 +1,5 @@
 package MainApplication.Controller;
+import CS4B.Messages.ChatroomList;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
 import javafx.event.ActionEvent;
@@ -29,8 +30,8 @@ public class ClientController extends Observable {
       ChoiceBox<String> chatroomSelect;
 
       public void initialize(){
-            chatroomSelect = new ChoiceBox<String>();
             chatroomSelect.getItems().add("New Chatroom");
+            chatroomSelect.getSelectionModel().selectFirst();
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -57,5 +58,9 @@ public class ClientController extends Observable {
 
       public void updateChatroomLists(ArrayList<String>chatrooms){
             chatroomSelect.getItems().addAll(chatrooms);
+      }
+
+      public void updateChatroomLists(ChatroomList list){
+            updateChatroomLists(list.getChatrooms());
       }
 }
