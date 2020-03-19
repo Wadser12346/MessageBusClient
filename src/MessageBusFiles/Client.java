@@ -83,8 +83,10 @@ public class Client extends Observable implements Observer, Runnable {
 
     public void sendMessage(SendMessage message){
         String chatroomName = message.getChatroomName();
+        System.out.println("Sorting through chatrooms to find correct one.");
         for(ClientChatroom c : chatrooms){
             if (c.getChatroomName().equals(chatroomName)){
+                System.out.println("Chatroom Found");
                 c.sendMessage(message);
                 break;
             }

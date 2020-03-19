@@ -4,9 +4,7 @@ import CS4B.Messages.ChatroomList;
 import MainApplication.Controller.ChatroomController;
 import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
-import MessageBusFiles.InternalWrappers.ConnectionAttempt;
-import MessageBusFiles.InternalWrappers.InternalPacket;
-import MessageBusFiles.InternalWrappers.SendMessage;
+import MessageBusFiles.InternalWrappers.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,7 +38,8 @@ public class ClientUI extends Application implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         InternalPacket packet = (InternalPacket)arg;
-            if (packet.getPacketType().equals("ConnectionAttempt")){
+        String messageType = packet.getPacketType();
+            if (messageType.equals("ConnectionAttempt")){
                 // Send to client
                 try{
                     System.out.println("Received ConnectionAttempt");
@@ -50,11 +49,19 @@ public class ClientUI extends Application implements Observer {
                     e.printStackTrace();
                 }
             }
-            else if(packet.getPacketType().equals("ChatroomList")){
+            else if(messageType.equals("ChatroomList")){
                 clientController.updateChatroomLists((ChatroomList)packet.getPacket());//Tell the controller to update the list
             }
-            else if (packet.getPacketType().equals("SendMessage")){
+            else if (messageType.equals("SendMessage")){
+                System.out.println("Passing message to Client to send");
                 client.sendMessage((SendMessage)packet.getPacket());
+            }
+            else if (messageType.equals("MessageReceived")){
+                clientController.displayIncomingMessage((MessageReceived) packet.getPacket());
+            }
+            else if (messageType.equals("OpenChat")){
+                System.out.println("Opening new backend chat");
+                client.startChatroom(((OpenChat)packet.getPacket()).getChatroomName());
             }
     }
 }

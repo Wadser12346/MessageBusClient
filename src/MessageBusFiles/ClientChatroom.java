@@ -52,6 +52,7 @@ public class ClientChatroom implements Runnable{
     }
 
     public void sendMessage(SendMessage message){
+        System.out.println("Adding message to outgoing blocking queue.");
         outgoing.add(new Packet(message.getUsername(), message.getChatroomName(), message.getMessage(), "ChatMessage"));
     }
 

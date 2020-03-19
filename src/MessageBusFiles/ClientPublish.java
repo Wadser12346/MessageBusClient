@@ -2,6 +2,7 @@ package MessageBusFiles;
 
 import CS4B.Messages.*;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.MessageReceived;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -36,6 +37,8 @@ public class ClientPublish extends Observable implements Runnable {
                             break;// It found the correct chatroom so no need to go any further
                         }
                     }
+                    setChanged();
+                    notifyObservers(new InternalPacket("MessageReceived", new MessageReceived(packet.getUser(), intendedRoom, message)));
                 }
                 else if(packet.getMessageType().equals("ChatroomList")){
                     //Send this list to Client so it can update the UI

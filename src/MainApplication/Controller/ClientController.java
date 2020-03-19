@@ -2,6 +2,7 @@ package MainApplication.Controller;
 import CS4B.Messages.ChatroomList;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.MessageReceived;
 import MessageBusFiles.InternalWrappers.OpenChat;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -110,16 +111,31 @@ public class ClientController extends Observable implements Observer {
             stage.setTitle(chatroomName);
             stage.setScene(new Scene(chatroomWindow, 600, 400));
             stage.show();
-            ChatroomController controller = (ChatroomController)chatroom.getController();
+            ChatroomController controller = chatroom.getController();
             controller.setChatroomName(chatroomName);
             controller.addObserver(this);
             controller.setUsername(clientName);
             openChats.add(controller);
+            setChanged();
+            notifyObservers(new InternalPacket("OpenChat", new OpenChat(chatroomName)));
+      }
+
+      public void displayIncomingMessage(MessageReceived message){
+            String intendedRoom = message.getChatroomName();
+            for (ChatroomController c: openChats){
+                  if(c.getChatroomName().equals(intendedRoom)){
+                        c.displayReceivedMessage(message);
+                        break;
+                  }
+            }
       }
 
       @Override
       public void update(Observable o, Object arg) {
+            System.out.println("Passing message from ChatroomController to ClientUI");
             setChanged();
             notifyObservers(arg);
       }
+
+
 }

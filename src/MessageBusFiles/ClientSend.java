@@ -25,6 +25,7 @@ public class ClientSend implements Runnable{
         try {
             ObjectOutputStream toServer = new ObjectOutputStream(connection.getOutputStream());
             while(true){
+                System.out.println("Sending message to server");
                 toServer.writeObject(outgoing.take());//Pull from blocking queue
             }
 

@@ -4,6 +4,7 @@ import CS4B.Messages.ChatMessage;
 import CS4B.Messages.Packet;
 import CS4B.Messages.StringMessage;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.MessageReceived;
 import MessageBusFiles.InternalWrappers.SendMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -43,13 +44,15 @@ public class ChatroomController extends Observable {
     }
 
     public void sendMessage(){
+        System.out.println("Sending Message");
         String message = messageTextField.getText();
+        messageTextField.clear();
         setChanged();
         notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message)))));
     }
 
-    public void displayReceivedMessage(ChatMessage message){
-        textDisplayArea.appendText(message.getStringMessage().toString());
+    public void displayReceivedMessage(MessageReceived message){
+        textDisplayArea.appendText(message.toString() + "\n");
     }
 
     public String getChatroomName() {
