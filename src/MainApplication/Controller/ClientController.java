@@ -50,6 +50,12 @@ public class ClientController extends Observable implements Observer {
                   attemptConnection();
                 }
           });
+          openChatroom.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                }
+          });
       }
 
       private void attemptConnection(){

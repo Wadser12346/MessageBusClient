@@ -11,12 +11,10 @@ public class ClientPublish extends Observable implements Runnable {
 
     private ArrayList<ClientChatroom> chatrooms;
     private BlockingQueue<Packet> incoming;
-    private Client client;
 
-    public ClientPublish(ArrayList<ClientChatroom> chatrooms, BlockingQueue<Packet> incoming, Client client){
+    public ClientPublish(ArrayList<ClientChatroom> chatrooms, BlockingQueue<Packet> incoming){
         this.chatrooms = chatrooms;
         this.incoming = incoming;
-        this.client = client;
         Thread self = new Thread(this);
         self.start();
     }
@@ -26,10 +24,10 @@ public class ClientPublish extends Observable implements Runnable {
     public void run() {
         // Grabs available messages from incoming and processes it and sends to relevant object
         try {
-//
             while (true) {
                 Packet packet = incoming.take();// Get the packet from the incoming queue
                 if (packet.getMessageType().equals("ChatMessage")){
+                    System.out.println("Message Received");
                     ChatMessage message = (ChatMessage)packet.getMessage();// Extract the message from packet
                     String intendedRoom = packet.getChatroomName();// Get the chatroom the message is for
                     for (ClientChatroom c : chatrooms){
@@ -46,13 +44,6 @@ public class ClientPublish extends Observable implements Runnable {
                     notifyObservers(new InternalPacket(packet.getMessageType(), packet.getMessage()));
                 }
             }
-//                ChatMessage message = incoming.take();// Extract the message from packet
-//
-//                for (ClientChatroom c : chatrooms) {
-//                    c.receiveMessage(message);
-//                }
-//            }
-
         }
         catch (InterruptedException e) {
             e.printStackTrace();

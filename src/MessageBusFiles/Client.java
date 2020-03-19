@@ -29,8 +29,6 @@ public class Client extends Observable implements Observer, Runnable {
     private boolean run;// This is so the disconnect function can set this to true and stop the while loop in run
 
     //TODO: Change to packet when available
-//    private BlockingQueue<Packet> outgoing;
-//    private BlockingQueue<Packet> incoming;
     private BlockingQueue<Packet> outgoing;
     private BlockingQueue<Packet> incoming;
 
@@ -43,16 +41,14 @@ public class Client extends Observable implements Observer, Runnable {
 
     public void main() {
         System.out.println("Starting Client Main");
-
         try{
             send = new ClientSend(serverConnection, outgoing);
             receive = new ClientReceive(serverConnection, incoming);
-            publish = new ClientPublish(chatrooms, incoming, this);
+            publish = new ClientPublish(chatrooms, incoming);
             publish.addObserver(this);
             chatrooms.add(new ClientChatroom("Chat 1", outgoing));
             Thread self = new Thread(this);
             self.start();
-
         } finally {
             System.out.println("Client closing.");
         }
@@ -62,7 +58,7 @@ public class Client extends Observable implements Observer, Runnable {
     public void run() {
         run = true;
         //Requesting ChatroomList
-        outgoing.add(new Packet("Client", "N/A", new RequestChatroom(), "RequestChatroom"));
+        outgoing.add(new Packet("Client", "N/A", new RequestChatroom(), "RequestChatroomList"));
         while(run){
 
         }

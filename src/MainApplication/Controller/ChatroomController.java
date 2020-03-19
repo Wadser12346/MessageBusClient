@@ -35,7 +35,7 @@ public class ChatroomController extends Observable {
     public void sendMessage(){
         String message = messageTextField.getText();
         setChanged();
-        notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, new ChatMessage(new StringMessage(message)))));
+        notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message)))));
     }
 
     public String getChatroomName() {
