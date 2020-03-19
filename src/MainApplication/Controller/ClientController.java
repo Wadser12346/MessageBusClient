@@ -53,7 +53,9 @@ public class ClientController extends Observable implements Observer {
           openChatroom.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                      if (chatroomSelect.getValue().equals("New Chatroom")){
+                            //TODO: Add functionality to aks user for chatroom name
+                      }
                 }
           });
       }
