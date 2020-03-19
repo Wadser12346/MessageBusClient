@@ -2,7 +2,6 @@ package MainApplication.Controller;
 import CS4B.Messages.ChatroomList;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
-
 import MessageBusFiles.InternalWrappers.OpenChat;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -38,10 +37,12 @@ public class ClientController extends Observable implements Observer {
 
       @FXML
       ComboBox<String> chatroomSelect;
+      String clientName;
 
       private ArrayList<ChatroomController> openChats;
 
       public void initialize(){
+            openChats = new ArrayList<>();
             chatroomSelect.getItems().add("New Chatroom");
             //chatroomSelect.getSelectionModel().selectFirst();
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -56,6 +57,13 @@ public class ClientController extends Observable implements Observer {
                       if (chatroomSelect.getValue().equals("New Chatroom")){
                             //TODO: Add functionality to aks user for chatroom name
                       }
+                      else{
+                            try {
+                                  openChatroomWindow(chatroomSelect.getValue());
+                            } catch (IOException e) {
+                                  e.printStackTrace();
+                            }
+                      }
                 }
           });
       }
@@ -69,7 +77,8 @@ public class ClientController extends Observable implements Observer {
                   //Check if empty
                   if (user.isBlank()){
                         user = "Anonymous";
-                        username.setPromptText("Anonymous");
+                        username.setPromptText(user);
+                        clientName = user;
                   }
                   setChanged();
                   notifyObservers(new InternalPacket("ConnectionAttempt", new ConnectionAttempt(serverName.getText(), portNumber.getText(), user)));
@@ -94,15 +103,17 @@ public class ClientController extends Observable implements Observer {
       private void openChatroomWindow(String chatroomName) throws IOException {
             setChanged();
             notifyObservers(new InternalPacket("OpenChat",new OpenChat(chatroomName)));// Tell client to open a chat on the backend
-            FXMLLoader chatroom = new FXMLLoader(getClass().getResource("FXML/Chatroom.fxml"));
+
+            FXMLLoader chatroom = new FXMLLoader(getClass().getResource("../FXML/Chatroom.fxml"));
             Parent chatroomWindow = chatroom.load();
             Stage stage = new Stage();
             stage.setTitle(chatroomName);
-            stage.setScene(new Scene(chatroomWindow, 450, 450));
+            stage.setScene(new Scene(chatroomWindow, 600, 400));
             stage.show();
             ChatroomController controller = (ChatroomController)chatroom.getController();
             controller.setChatroomName(chatroomName);
             controller.addObserver(this);
+            controller.setUsername(clientName);
             openChats.add(controller);
       }
 

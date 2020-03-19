@@ -17,7 +17,7 @@
             <Label text="Name:" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <TextField BorderPane.alignment="CENTER" />
+            <TextField fx:id="userNameTextBox" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
       <BorderPane layoutX="21.0" layoutY="316.0" prefHeight="71.0" prefWidth="558.0">
@@ -33,7 +33,7 @@
             <Label text="Chatroom Name:" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <TextField BorderPane.alignment="CENTER" />
+            <TextField fx:id="chatroomNameTextBox" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </children>

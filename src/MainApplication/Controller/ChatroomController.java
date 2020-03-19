@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.Observable;
@@ -19,6 +20,15 @@ public class ChatroomController extends Observable {
 
     @FXML
     TextField messageTextField;
+
+    @FXML
+    TextField userNameTextBox;
+
+    @FXML
+    TextField chatroomNameTextBox;
+
+    @FXML
+    TextArea textDisplayArea;
 
     String chatroomName;
     String username;
@@ -38,13 +48,21 @@ public class ChatroomController extends Observable {
         notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message)))));
     }
 
+    public void displayReceivedMessage(ChatMessage message){
+        textDisplayArea.appendText(message.getStringMessage().toString());
+    }
+
     public String getChatroomName() {
         return chatroomName;
     }
 
     public void setChatroomName(String chatroomName) {
         this.chatroomName = chatroomName;
+        chatroomNameTextBox.setText(chatroomName);
     }
 
-
+    public void setUsername(String username) {
+        this.username = username;
+        userNameTextBox.setText(username);
+    }
 }
