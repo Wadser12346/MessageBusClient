@@ -11,5 +11,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="MessageTypes" level="project" />
+    <orderEntry type="library" name="Messages" level="project" />
   </component>
 </module>
