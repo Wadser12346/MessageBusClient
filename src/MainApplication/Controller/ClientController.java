@@ -45,7 +45,6 @@ public class ClientController extends Observable implements Observer {
       public void initialize(){
             openChats = new ArrayList<>();
             chatroomSelect.getItems().add("New Chatroom");
-            //chatroomSelect.getSelectionModel().selectFirst();
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -67,6 +66,17 @@ public class ClientController extends Observable implements Observer {
                       }
                 }
           });
+
+          disconnectButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+                }
+          });
+      }
+
+      private void disconnect(){
+
       }
 
       private void attemptConnection(){
@@ -78,6 +88,10 @@ public class ClientController extends Observable implements Observer {
                   //Check if empty
                   if (user.isBlank()){
                         user = "Anonymous";
+                        username.setPromptText(user);
+                        clientName = user;
+                  }
+                  else{
                         username.setPromptText(user);
                         clientName = user;
                   }
