@@ -13,19 +13,16 @@ import java.util.concurrent.BlockingQueue;
  * It will display the messages coming in and send messages out
  * It will store a log of the chat
  */
-public class ClientChatroom implements Runnable{
+public class ClientChatroom {
     private String chatroomName;
     private ArrayList<ChatMessage>chatlog;
     private BlockingQueue<Packet> outgoing;
-    //private BlockingQueue<Packet> outgoing;
 
 
     public ClientChatroom(String chatroomName, BlockingQueue<Packet> outgoing) {
         this.chatroomName = chatroomName;
         this.outgoing = outgoing;
         chatlog = new ArrayList<>();
-        Thread self = new Thread(this);
-        self.start();
     }
 
      /**
@@ -56,14 +53,4 @@ public class ClientChatroom implements Runnable{
         outgoing.add(new Packet(message.getUsername(), message.getChatroomName(), message.getMessage(), "ChatMessage"));
     }
 
-    @Override
-    public void run() {
-        Scanner input = new Scanner(System.in);
-        while (true){
-            System.out.print("Enter Message: ");
-            String message = input.nextLine();
-            //outgoing.add(new Packet("", chatroomName,new ChatMessage(new StringMessage(message)), "ChatMessage"));
-            outgoing.add(new Packet("Client", chatroomName, new ChatMessage(new StringMessage(message)), "ChatMessage"));
-        }
-    }
 }
