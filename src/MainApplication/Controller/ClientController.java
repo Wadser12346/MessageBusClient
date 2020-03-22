@@ -69,8 +69,8 @@ public class ClientController extends Observable implements Observer {
 
           disconnectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(ActionEvent event) {
-
+                public void handle(ActionEvent event){
+                      disconnect();
                 }
           });
       }
