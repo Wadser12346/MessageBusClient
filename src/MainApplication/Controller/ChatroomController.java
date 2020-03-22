@@ -83,8 +83,14 @@ public class ChatroomController extends Observable {
         String message = messageTextField.getText();
         messageTextField.clear();
         setChanged();
-        notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message), new PictureMessage(image)))));
-        image = null;
+        if (image != null){
+            notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message), new PictureMessage(image)))));
+            image = null;
+        }
+        else{
+            notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message), new PictureMessage()))));
+        }
+
     }
 
     public void displayReceivedMessage(MessageReceived message) throws IOException {
@@ -93,7 +99,7 @@ public class ChatroomController extends Observable {
         if (text != null)
             textDisplayArea.appendText(message.toString() + "\n");
 
-        if (picture != null){
+        if (picture.getPicture() != null){
             FXMLLoader imageView = new FXMLLoader(getClass().getResource("../FXML/ImageViewer.fxml"));
             Parent imageViewerWindow = imageView.load();
             Platform.runLater(new Runnable() {
