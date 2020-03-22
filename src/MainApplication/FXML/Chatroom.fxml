@@ -22,11 +22,14 @@
       </BorderPane>
       <BorderPane layoutX="21.0" layoutY="316.0" prefHeight="71.0" prefWidth="558.0">
          <left>
-            <TextField fx:id="messageTextField" prefHeight="105.0" prefWidth="474.0" BorderPane.alignment="CENTER" />
+            <TextField fx:id="messageTextField" prefHeight="71.0" prefWidth="407.0" BorderPane.alignment="CENTER" />
          </left>
          <right>
             <Button fx:id="messageEnterButton" mnemonicParsing="false" prefHeight="66.0" prefWidth="77.0" text="Enter" BorderPane.alignment="CENTER" />
          </right>
+         <center>
+            <Button fx:id="attachButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="66.0" text="Attach" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
       <BorderPane layoutX="325.0" layoutY="49.0" prefHeight="35.0" prefWidth="249.0">
          <left>

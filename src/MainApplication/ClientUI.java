@@ -57,7 +57,11 @@ public class ClientUI extends Application implements Observer {
                 client.sendMessage((SendMessage)packet.getPacket());
             }
             else if (messageType.equals("MessageReceived")){
-                clientController.displayIncomingMessage((MessageReceived) packet.getPacket());
+                try {
+                    clientController.displayIncomingMessage((MessageReceived) packet.getPacket());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else if (messageType.equals("OpenChat")){
                 System.out.println("Opening new backend chat");

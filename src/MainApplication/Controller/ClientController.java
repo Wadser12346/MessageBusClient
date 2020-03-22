@@ -120,7 +120,7 @@ public class ClientController extends Observable implements Observer {
             notifyObservers(new InternalPacket("OpenChat", new OpenChat(chatroomName)));
       }
 
-      public void displayIncomingMessage(MessageReceived message){
+      public void displayIncomingMessage(MessageReceived message) throws IOException {
             String intendedRoom = message.getChatroomName();
             for (ChatroomController c: openChats){
                   if(c.getChatroomName().equals(intendedRoom)){

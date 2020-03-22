@@ -32,7 +32,7 @@ public class ClientPublish extends Observable implements Runnable {
                     ChatMessage message = (ChatMessage)packet.getMessage();// Extract the message from packet
                     String intendedRoom = packet.getChatroomName();// Get the chatroom the message is for
                     for (ClientChatroom c : chatrooms){
-                        if (c.getChatroomName() == intendedRoom){// If it finds the correct chatrooms(s)
+                        if (c.getChatroomName().equals(intendedRoom)){// If it finds the correct chatrooms(s)
                             c.receiveMessage(message);
                             break;// It found the correct chatroom so no need to go any further
                         }
