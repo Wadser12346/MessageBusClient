@@ -77,8 +77,9 @@ public class Client extends Observable implements Observer, Runnable {
         chatrooms.add(new ClientChatroom(chatroomName, outgoing));
     }
 
-    public void updateChatroomUI(){
-
+    public void disconnect(){
+        outgoing.add(new Packet("Client", "N/A", new DisconnectMessageClient(), "DisconnectMessageClient"));
+        serverConnection = null;
     }
 
     public void sendMessage(SendMessage message){

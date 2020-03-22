@@ -24,8 +24,6 @@ public class ClientUI extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        client = new Client();
-        client.addObserver(this);
         FXMLLoader chat = new FXMLLoader(getClass().getResource("FXML/Client.fxml"));
         Parent mainClient = chat.load();
         primaryStage.setTitle("Messenger");
@@ -43,6 +41,8 @@ public class ClientUI extends Application implements Observer {
                 // Send to client
                 try{
                     System.out.println("Received ConnectionAttempt");
+                    client = new Client();
+                    client.addObserver(this);
                     client.setServerConnection((ConnectionAttempt) packet.getPacket());
                     client.main();
                 } catch (IOException e) {
@@ -66,6 +66,13 @@ public class ClientUI extends Application implements Observer {
             else if (messageType.equals("OpenChat")){
                 System.out.println("Opening new backend chat");
                 client.startChatroom(((OpenChat)packet.getPacket()).getChatroomName());
+            }
+            else if (messageType.equals("DisconnectAttempt")){
+                if(client != null) {
+                    System.out.println("Client Attempting Disconnect");
+                    client.disconnect();
+                    client = null;
+                }
             }
     }
 }

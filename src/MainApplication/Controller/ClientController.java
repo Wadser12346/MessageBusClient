@@ -1,9 +1,6 @@
 package MainApplication.Controller;
 import CS4B.Messages.ChatroomList;
-import MessageBusFiles.InternalWrappers.ConnectionAttempt;
-import MessageBusFiles.InternalWrappers.InternalPacket;
-import MessageBusFiles.InternalWrappers.MessageReceived;
-import MessageBusFiles.InternalWrappers.OpenChat;
+import MessageBusFiles.InternalWrappers.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -76,7 +73,8 @@ public class ClientController extends Observable implements Observer {
       }
 
       private void disconnect(){
-
+            setChanged();
+            notifyObservers(new InternalPacket("DisconnectAttempt", new DisconnectAttempt()));
       }
 
       private void attemptConnection(){
