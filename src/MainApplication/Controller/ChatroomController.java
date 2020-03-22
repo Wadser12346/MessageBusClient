@@ -4,6 +4,7 @@ package MainApplication.Controller;
 import CS4B.Messages.*;
 
 import MessageBusFiles.InternalWrappers.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,37 +14,68 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Observable;
 
 public class ChatroomController extends Observable {
     @FXML
-    Button messageEnterButton;
+    private Button messageEnterButton;
 
     @FXML
-    TextField messageTextField;
+    private TextField messageTextField;
 
     @FXML
-    TextField userNameTextBox;
+    private TextField userNameTextBox;
 
     @FXML
-    TextField chatroomNameTextBox;
+    private TextField chatroomNameTextBox;
 
     @FXML
-    TextArea textDisplayArea;
+    private TextArea textDisplayArea;
 
-    String chatroomName;
-    String username;
+    @FXML
+    private Button attachButton;
+
+    private String chatroomName;
+    private String username;
+
+    private Image image;
 
     public void initialize(){
+        this.image = null;
         messageEnterButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 sendMessage();
             }
         });
+
+        attachButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    image = attachImage();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public Image attachImage() throws FileNotFoundException {
+        Stage selectFile = new Stage();
+        selectFile.setTitle("Select Image");
+        FileChooser fileChooser = new FileChooser();
+        File newImage = fileChooser.showOpenDialog(selectFile);
+        FileInputStream in = new FileInputStream(newImage);
+        return new Image(in);
     }
 
     public void sendMessage(){
@@ -51,7 +83,8 @@ public class ChatroomController extends Observable {
         String message = messageTextField.getText();
         messageTextField.clear();
         setChanged();
-        notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message)))));
+        notifyObservers(new InternalPacket("SendMessage" ,new SendMessage(chatroomName, username, new ChatMessage(new StringMessage(message), new PictureMessage(image)))));
+        image = null;
     }
 
     public void displayReceivedMessage(MessageReceived message) throws IOException {
@@ -63,11 +96,16 @@ public class ChatroomController extends Observable {
         if (picture != null){
             FXMLLoader imageView = new FXMLLoader(getClass().getResource("../FXML/ImageViewer.fxml"));
             Parent imageViewerWindow = imageView.load();
-            Stage stage = new Stage();
-            stage.setTitle("Incoming Image");
-            stage.setScene(new Scene(imageViewerWindow, 600, 600));
-            stage.show();
-            ((ImageViewerController)imageView.getController()).displayImage(picture.getPicture());
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Stage stage = new Stage();
+                    stage.setTitle("Incoming Image");
+                    stage.setScene(new Scene(imageViewerWindow, 600, 600));
+                    stage.show();
+                    ((ImageViewerController)imageView.getController()).displayImage(picture.getPicture());
+                }
+            });
         }
     }
 
