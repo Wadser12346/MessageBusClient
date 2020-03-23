@@ -119,6 +119,8 @@ public class ClientController extends Observable implements Observer {
                   @Override
                   public void run() {
                         System.out.println("Updating Chatroom List");
+                        chatroomSelect.getItems().clear();
+                        chatroomSelect.getItems().add("New Chatroom");
                         chatroomSelect.getItems().addAll(chatrooms);
                         chatroomSelect.getSelectionModel().selectFirst();
                   }
