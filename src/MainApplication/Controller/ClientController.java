@@ -40,8 +40,8 @@ public class ClientController extends Observable implements Observer {
       private ArrayList<ChatroomController> openChats;
 
       public void initialize(){
-            openChats = new ArrayList<>();
-            chatroomSelect.getItems().add("New Chatroom");
+          openChats = new ArrayList<>();
+          chatroomSelect.getItems().add("New Chatroom");
           connectButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -52,7 +52,8 @@ public class ClientController extends Observable implements Observer {
                 @Override
                 public void handle(ActionEvent event) {
                       if (chatroomSelect.getValue().equals("New Chatroom")){
-                            //TODO: Add functionality to aks user for chatroom name
+//TO DO : implement   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                            JoinController joinController = new JoinController();
                       }
                       else{
                             try {

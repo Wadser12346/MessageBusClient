@@ -1,7 +1,6 @@
 package MainApplication;
 
 import CS4B.Messages.ChatroomList;
-import MainApplication.Controller.ChatroomController;
 import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
 import MessageBusFiles.InternalWrappers.*;
