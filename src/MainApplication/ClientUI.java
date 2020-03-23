@@ -73,5 +73,8 @@ public class ClientUI extends Application implements Observer {
                     client = null;
                 }
             }
+            else if (messageType.equals("NewChatroom")){
+                System.out.println("Crete new chatroom");
+            }
     }
 }

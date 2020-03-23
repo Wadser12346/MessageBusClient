@@ -38,6 +38,7 @@ public class ClientController extends Observable implements Observer {
       String clientName;
 
       private ArrayList<ChatroomController> openChats;
+      private JoinController joinController;
 
       public void initialize(){
           openChats = new ArrayList<>();
@@ -52,8 +53,11 @@ public class ClientController extends Observable implements Observer {
                 @Override
                 public void handle(ActionEvent event) {
                       if (chatroomSelect.getValue().equals("New Chatroom")){
-//TO DO : implement   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                            JoinController joinController = new JoinController();
+                            try {
+                                  newChatRoom();
+                            } catch (IOException e) {
+                                  e.printStackTrace();
+                            }
                       }
                       else{
                             try {
@@ -72,6 +76,20 @@ public class ClientController extends Observable implements Observer {
                 }
           });
       }
+
+      private void newChatRoom () throws IOException {
+            joinController = new JoinController();
+            joinController.addObserver(this);
+
+            FXMLLoader chatroom = new FXMLLoader(getClass().getResource("../FXML/Join.fxml"));
+            Parent chatroomWindow = chatroom.load();
+            Stage stage = new Stage();
+            stage.setTitle("New Chatroom");
+            stage.setScene(new Scene(chatroomWindow, 600, 400));
+            chatroom.setController(joinController);
+            stage.show();
+      }
+
 
       private void disconnect(){
             setChanged();
