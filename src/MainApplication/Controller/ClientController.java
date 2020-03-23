@@ -79,15 +79,15 @@ public class ClientController extends Observable implements Observer {
       private void newChatRoom () throws IOException {
             JoinController joinController = new JoinController();
             joinController.addObserver(this);
-            FXMLLoader chatroom = new FXMLLoader(getClass().getResource("../FXML/Join.fxml"));
-            Parent chatroomWindow = chatroom.load();
-            chatroom.setController(joinController);
+            FXMLLoader newChatRequest = new FXMLLoader(getClass().getResource("../FXML/Join.fxml"));
+            Parent newChat = newChatRequest.load();
+            newChatRequest.setController(joinController);
             Platform.runLater(new Runnable() {
                   @Override
                   public void run() {
                         Stage stage = new Stage();
                         stage.setTitle("New Chatroom");
-                        stage.setScene(new Scene(chatroomWindow, 600, 400));
+                        stage.setScene(new Scene(newChat, 600, 400));
                         stage.show();
                   }
             });
