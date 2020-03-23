@@ -72,6 +72,8 @@ public class ClientController extends Observable implements Observer {
           });
       }
 
+
+
       private void disconnect(){
             setChanged();
             notifyObservers(new InternalPacket("DisconnectAttempt", new DisconnectAttempt()));
