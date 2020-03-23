@@ -1,7 +1,6 @@
 package MainApplication;
 
 import CS4B.Messages.ChatroomList;
-import MainApplication.Controller.ChatroomController;
 import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
 import MessageBusFiles.InternalWrappers.*;
@@ -73,6 +72,9 @@ public class ClientUI extends Application implements Observer {
                     client.disconnect();
                     client = null;
                 }
+            }
+            else if (messageType.equals("NewChatroom")){
+                System.out.println("Crete new chatroom");
             }
     }
 }
