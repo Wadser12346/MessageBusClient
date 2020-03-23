@@ -95,6 +95,7 @@ public class Client extends Observable implements Observer, Runnable {
     }
 
     public void newChatroom(NewChatroom chatroom) {
+        System.out.println("Sending Chatroom Request to Server.");
         outgoing.add(new Packet("client", "N/A", chatroom, "NewChatroom"));
     }
 

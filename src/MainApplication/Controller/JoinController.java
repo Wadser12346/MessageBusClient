@@ -28,15 +28,11 @@ public class JoinController extends Observable {
                     chatName = chatroomName.getText();
                     chatName.trim();
                     if (!chatName.isBlank()) {
+                        System.out.println("Making new Chatroom.");
                         setChanged();
                         notifyObservers(new InternalPacket ("NewChatroom", new NewChatroom(chatName)));
                     }
                 }
             });
-    }
-
-    private void exit(){
-        setChanged();
-        notifyObservers(new InternalPacket("error creating chat", new DisconnectAttempt()));
     }
 }
