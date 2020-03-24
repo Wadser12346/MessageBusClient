@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -77,9 +76,9 @@ public class ClientController extends Observable implements Observer {
       }
 
       private void newChatroom() throws IOException {
-            FXMLLoader newChatroomWindow = new FXMLLoader(getClass().getResource("../FXML/Join.fxml"));
+            FXMLLoader newChatroomWindow = new FXMLLoader(getClass().getResource("../FXML/NewChatWindowPrompt.fxml"));
             Parent chatroomWindow = newChatroomWindow.load();
-            ((JoinController)newChatroomWindow.getController()).addObserver(this);
+            ((NewChatWindowController)newChatroomWindow.getController()).addObserver(this);
             Platform.runLater(new Runnable() {
                   @Override
                   public void run() {
@@ -120,6 +119,9 @@ public class ClientController extends Observable implements Observer {
       }
 
       public void updateChatroomLists(ArrayList<String>chatrooms){
+            for (String s : chatrooms){
+                  System.out.println(s);
+            }
             Platform.runLater(new Runnable() {
                   @Override
                   public void run() {

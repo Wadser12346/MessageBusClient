@@ -50,6 +50,7 @@ public class ClientUI extends Application implements Observer {
                 }
             }
             else if(messageType.equals("ChatroomList")){
+                System.out.println("Passing new ChatroomList to ClientController");
                 clientController.updateChatroomLists((ChatroomList)packet.getPacket());//Tell the controller to update the list
             }
             else if (messageType.equals("SendMessage")){

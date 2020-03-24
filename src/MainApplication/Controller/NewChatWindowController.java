@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.util.Observable;
 
 
-public class JoinController extends Observable {
+public class NewChatWindowController extends Observable {
 
     @FXML
     Button createButton;
