@@ -45,7 +45,7 @@ public class ClientPublish extends Observable implements Runnable {
                     System.out.println("Sending ChatroomList to Client");
                     setChanged();
                     notifyObservers(new InternalPacket(packet.getMessageType(), packet.getMessage()));
-                }
+            }
             }
         }
         catch (InterruptedException e) {

@@ -35,6 +35,7 @@ public class ClientController extends Observable implements Observer {
       @FXML
       ComboBox<String> chatroomSelect;
       String clientName;
+      boolean run = false;
 
       private ArrayList<ChatroomController> openChats;
 
@@ -119,14 +120,11 @@ public class ClientController extends Observable implements Observer {
       }
 
       public void updateChatroomLists(ArrayList<String>chatrooms){
-            for (String s : chatrooms){
-                  System.out.println(s);
-            }
             Platform.runLater(new Runnable() {
                   @Override
                   public void run() {
                         System.out.println("Updating Chatroom List");
-                        chatroomSelect.getItems().clear();
+                        chatroomSelect.getItems().clear();//Clears out chatroomSelect combobox
                         chatroomSelect.getItems().add("New Chatroom");
                         chatroomSelect.getItems().addAll(chatrooms);
                         chatroomSelect.getSelectionModel().selectFirst();

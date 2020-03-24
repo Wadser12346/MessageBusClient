@@ -46,7 +46,7 @@ public class Client extends Observable implements Observer, Runnable {
             receive = new ClientReceive(serverConnection, incoming);
             publish = new ClientPublish(chatrooms, incoming);
             publish.addObserver(this);
-            chatrooms.add(new ClientChatroom("Chat 1", outgoing));
+            //chatrooms.add(new ClientChatroom("Chat 1", outgoing));
             Thread self = new Thread(this);
             self.start();
         } finally {
@@ -94,9 +94,9 @@ public class Client extends Observable implements Observer, Runnable {
         }
     }
 
-    public void newChatroom(NewChatroom chatroom) {
+    public void newChatroom(NewChatroom newChatroom) {
         System.out.println("Sending Chatroom Request to Server.");
-        outgoing.add(new Packet("client", "N/A", chatroom, "NewChatroomRequest"));
+        outgoing.add(new Packet("client", "N/A", newChatroom, "NewChatroomRequest"));
     }
 
     public void test(){

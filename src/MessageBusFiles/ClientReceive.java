@@ -40,7 +40,16 @@ public class ClientReceive implements Runnable {
         try {
             ObjectInputStream fromServer = new ObjectInputStream(connection.getInputStream());
             while(true){
-                incoming.add((Packet) fromServer.readObject());// This adds the packet, does not decode or anything
+                Packet packet = (Packet) fromServer.readObject();
+                if (packet.getMessageType().equals("ChatroomList")){
+                    System.out.println("Printing Incoming Chatroom List");
+                    for (String s: ((ChatroomList)packet.getMessage()).getChatrooms()){
+                        System.out.println(s);
+                    }
+                }
+                //incoming.add((Packet) fromServer.readObject());// This adds the packet, does not decode or anything
+                incoming.add(packet);
+
             }
 
         } catch (IOException | ClassNotFoundException e) {
