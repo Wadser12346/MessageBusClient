@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="JoinMain" prefHeight="100.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.JoinController">
+<AnchorPane fx:id="JoinMain" prefHeight="100.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainApplication.Controller.JoinController">
 <children>
     <TextField fx:id="chatroomName" layoutX="14.0" layoutY="51.0" promptText="Enter Chatroom Name" />
     <Label layoutX="15.0" layoutY="26.0" text="Chatroom Name" />
