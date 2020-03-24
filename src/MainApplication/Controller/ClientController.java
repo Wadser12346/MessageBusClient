@@ -52,7 +52,11 @@ public class ClientController extends Observable implements Observer {
                 @Override
                 public void handle(ActionEvent event) {
                       if (chatroomSelect.getValue().equals("New Chatroom")){
-                            //TODO: Add functionality to aks user for chatroom name
+                            try {
+                                  newChatroom();
+                            } catch (IOException e) {
+                                  e.printStackTrace();
+                            }
                       }
                       else{
                             try {
@@ -70,6 +74,21 @@ public class ClientController extends Observable implements Observer {
                       disconnect();
                 }
           });
+      }
+
+      private void newChatroom() throws IOException {
+            FXMLLoader newChatroomWindow = new FXMLLoader(getClass().getResource("../FXML/Join.fxml"));
+            Parent chatroomWindow = newChatroomWindow.load();
+            ((JoinController)newChatroomWindow.getController()).addObserver(this);
+            Platform.runLater(new Runnable() {
+                  @Override
+                  public void run() {
+                        Stage stage = new Stage();
+                        stage.setTitle("New Chatroom");
+                        stage.setScene(new Scene(chatroomWindow, 250, 100));
+                        stage.show();
+                  }
+            });
       }
 
 
@@ -105,6 +124,8 @@ public class ClientController extends Observable implements Observer {
                   @Override
                   public void run() {
                         System.out.println("Updating Chatroom List");
+                        chatroomSelect.getItems().clear();
+                        chatroomSelect.getItems().add("New Chatroom");
                         chatroomSelect.getItems().addAll(chatrooms);
                         chatroomSelect.getSelectionModel().selectFirst();
                   }
