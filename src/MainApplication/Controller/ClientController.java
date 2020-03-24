@@ -80,15 +80,10 @@ public class ClientController extends Observable implements Observer {
             FXMLLoader newChatroomWindow = new FXMLLoader(getClass().getResource("../FXML/NewChatWindowPrompt.fxml"));
             Parent chatroomWindow = newChatroomWindow.load();
             ((NewChatWindowController)newChatroomWindow.getController()).addObserver(this);
-            Platform.runLater(new Runnable() {
-                  @Override
-                  public void run() {
-                        Stage stage = new Stage();
-                        stage.setTitle("New Chatroom");
-                        stage.setScene(new Scene(chatroomWindow, 250, 100));
-                        stage.show();
-                  }
-            });
+            Stage stage = new Stage();
+            stage.setTitle("New Chatroom");
+            stage.setScene(new Scene(chatroomWindow, 250, 100));
+            stage.show();
       }
 
 
