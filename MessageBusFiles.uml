@@ -4,8 +4,8 @@
   <OriginalElement>MessageBusFiles</OriginalElement>
   <nodes>
     <node x="297.0" y="0.0">MessageBusFiles.ClientChatroom</node>
-    <node x="450.0" y="554.0">MessageBusFiles.ClientSend</node>
     <node x="650.0" y="0.0">MessageBusFiles.ClientReceive</node>
+    <node x="450.0" y="554.0">MessageBusFiles.ClientSend</node>
     <node x="0.0" y="554.0">MessageBusFiles.ClientPublish</node>
     <node x="0.0" y="0.0">MessageBusFiles.Client</node>
     <node x="0.0" y="758.0">MessageBusFiles.InternalWrappers</node>

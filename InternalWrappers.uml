@@ -3,8 +3,8 @@
   <ID>JAVA</ID>
   <OriginalElement>MessageBusFiles.InternalWrappers</OriginalElement>
   <nodes>
-    <node x="0.0" y="226.0">MessageBusFiles.InternalWrappers.SendMessage</node>
     <node x="0.0" y="410.0">MessageBusFiles.InternalWrappers.InternalPacket</node>
+    <node x="0.0" y="226.0">MessageBusFiles.InternalWrappers.SendMessage</node>
     <node x="322.0" y="226.0">MessageBusFiles.InternalWrappers.DisconnectAttempt</node>
     <node x="342.0" y="0.0">MessageBusFiles.InternalWrappers.ConnectionAttempt</node>
     <node x="248.0" y="410.0">MessageBusFiles.InternalWrappers.OpenChat</node>
@@ -20,8 +20,8 @@
     <Category>Fields</Category>
     <Category>Constructors</Category>
     <Category>Methods</Category>
-    <Category>Inner Classes</Category>
     <Category>Properties</Category>
+    <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
