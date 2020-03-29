@@ -1,6 +1,7 @@
 package MainApplication;
 
 import CS4B.Messages.ChatroomList;
+import CS4B.Messages.JoinSucessful;
 import CS4B.Messages.NewChatroom;
 import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
@@ -78,6 +79,14 @@ public class ClientUI extends Application implements Observer {
             else if (messageType.equals("NewChatroom")){
                 System.out.println("Sending NewChatroom to client.");
                 client.newChatroom((NewChatroom) packet.getPacket());
+            }
+            else if (messageType.equals("JoinSucessful")){
+                System.out.println("Opening chatroom: " + ((JoinSucessful)packet.getPacket()).getChatroom());
+                try {
+                    clientController.openChat((JoinSucessful)packet.getPacket());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
     }
 }
