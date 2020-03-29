@@ -26,13 +26,15 @@ public class Client extends Observable implements Observer, Runnable {
     private ClientPublish publish;
     private ArrayList<ClientChatroom> chatrooms;
     private Socket serverConnection;
+    private String username;
     private boolean run;// This is so the disconnect function can set this to true and stop the while loop in run
 
     //TODO: Change to packet when available
     private BlockingQueue<Packet> outgoing;
     private BlockingQueue<Packet> incoming;
 
-    public Client(){
+    public Client(String username){
+        this.username = username;
         outgoing = new ArrayBlockingQueue<>(100);
         incoming = new ArrayBlockingQueue<>(100);
         chatrooms = new ArrayList<>();
@@ -74,7 +76,8 @@ public class Client extends Observable implements Observer, Runnable {
 
     public void startChatroom(String chatroomName){
         //TODO: Check for already open classrooms
-        chatrooms.add(new ClientChatroom(chatroomName, outgoing));
+        chatrooms.add(new ClientChatroom(chatroomName, outgoing));//Adds the chatroom to the client's list so it can log messages
+        outgoing.add(new Packet(username, chatroomName, new JoinChatroom(chatroomName), "JoinChatroom"));//Tells server that client is opening this classroom.
     }
 
     public void disconnect(){

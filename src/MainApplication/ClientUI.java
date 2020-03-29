@@ -41,7 +41,7 @@ public class ClientUI extends Application implements Observer {
                 // Send to client
                 try{
                     System.out.println("Received ConnectionAttempt");
-                    client = new Client();
+                    client = new Client(((ConnectionAttempt)packet.getPacket()).getUsername());
                     client.addObserver(this);
                     client.setServerConnection((ConnectionAttempt) packet.getPacket());
                     client.main();
