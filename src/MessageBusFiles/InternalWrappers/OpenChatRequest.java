@@ -1,9 +1,9 @@
 package MessageBusFiles.InternalWrappers;
 
-public class OpenChat {
+public class OpenChatRequest {
     String chatroomName;
 
-    public OpenChat(String chatroomName){
+    public OpenChatRequest(String chatroomName){
         this.chatroomName = chatroomName;
     }
 

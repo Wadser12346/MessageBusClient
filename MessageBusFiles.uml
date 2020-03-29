@@ -3,18 +3,17 @@
   <ID>JAVA</ID>
   <OriginalElement>MessageBusFiles</OriginalElement>
   <nodes>
-    <node x="297.0" y="0.0">MessageBusFiles.ClientChatroom</node>
-    <node x="450.0" y="554.0">MessageBusFiles.ClientSend</node>
-    <node x="650.0" y="0.0">MessageBusFiles.ClientReceive</node>
-    <node x="0.0" y="554.0">MessageBusFiles.ClientPublish</node>
+    <node x="301.0" y="0.0">MessageBusFiles.ClientChatroom</node>
+    <node x="0.0" y="554.0">MessageBusFiles.ClientReceive</node>
+    <node x="0.0" y="780.0">MessageBusFiles.ClientSend</node>
+    <node x="453.90999999999997" y="395.28999999999996">MessageBusFiles.ClientPublish</node>
     <node x="0.0" y="0.0">MessageBusFiles.Client</node>
-    <node x="0.0" y="758.0">MessageBusFiles.InternalWrappers</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="0.6530359355638166" x="474.0" y="393.5" />
+  <settings layout="Hierarchic Group" zoom="0.7434944237918215" x="477.0" y="393.5" />
   <SelectedNodes>
-    <node>MessageBusFiles.ClientChatroom</node>
+    <node>MessageBusFiles.ClientPublish</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>

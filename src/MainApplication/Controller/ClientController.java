@@ -1,5 +1,6 @@
 package MainApplication.Controller;
 import CS4B.Messages.ChatroomList;
+import CS4B.Messages.JoinSucessful;
 import MessageBusFiles.InternalWrappers.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -59,11 +60,7 @@ public class ClientController extends Observable implements Observer {
                             }
                       }
                       else{
-                            try {
-                                  openChatroomWindow(chatroomSelect.getValue());
-                            } catch (IOException e) {
-                                  e.printStackTrace();
-                            }
+                            openChatroomRequest(chatroomSelect.getValue());
                       }
                 }
           });
@@ -131,10 +128,17 @@ public class ClientController extends Observable implements Observer {
             updateChatroomLists(list.getChatrooms());
       }
 
-      private void openChatroomWindow(String chatroomName) throws IOException {
+      /**
+       * openChatroomRequest(String chatroomName)
+       * @param chatroomName: Name of the chatroom user wants to open
+       */
+      private void openChatroomRequest(String chatroomName){
             setChanged();
-            notifyObservers(new InternalPacket("OpenChat",new OpenChat(chatroomName)));// Tell client to open a chat on the backend
+            notifyObservers(new InternalPacket("OpenChatRequest",new OpenChatRequest(chatroomName)));// Tell client to open a chat on the backend
+      }
 
+      public void openChat(JoinSucessful join) throws IOException {
+            String chatroomName = join.getChatroom();
             FXMLLoader chatroom = new FXMLLoader(getClass().getResource("../FXML/Chatroom.fxml"));
             Parent chatroomWindow = chatroom.load();
             Stage stage = new Stage();
@@ -147,7 +151,7 @@ public class ClientController extends Observable implements Observer {
             controller.setUsername(clientName);
             openChats.add(controller);
             setChanged();
-            notifyObservers(new InternalPacket("OpenChat", new OpenChat(chatroomName)));
+            notifyObservers(new InternalPacket("OpenChat", new OpenChatRequest(chatroomName)));
       }
 
       public void displayIncomingMessage(MessageReceived message) throws IOException {

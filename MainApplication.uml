@@ -3,20 +3,20 @@
   <ID>JAVA</ID>
   <OriginalElement>MainApplication</OriginalElement>
   <nodes>
-    <node x="0.0" y="432.0">MainApplication.FXML</node>
     <node x="0.0" y="0.0">MainApplication.ChatroomUI</node>
-    <node x="264.0" y="226.0">MainApplication.Controller</node>
     <node x="0.0" y="226.0">MainApplication.ClientUI</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="129.0" y="217.5" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="1.0" x="211.0" y="230.5" />
+  <SelectedNodes>
+    <node>MainApplication.ClientUI</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
-    <Category>Properties</Category>
     <Category>Methods</Category>
+    <Category>Properties</Category>
     <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>

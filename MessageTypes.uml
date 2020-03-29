@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>CS4B.Messages</OriginalElement>
+  <nodes>
+    <node x="191.0" y="164.0">CS4B.Messages.ConnectionMessageClient</node>
+    <node x="177.0" y="502.0">CS4B.Messages.Main</node>
+    <node x="0.0" y="306.0">CS4B.Messages.DisconnectMessageClient</node>
+    <node x="0.0" y="0.0">CS4B.Messages.ChatMessage</node>
+    <node x="0.0" y="164.0">CS4B.Messages.PictureMessage</node>
+    <node x="254.0" y="306.0">CS4B.Messages.ChatroomList</node>
+    <node x="0.0" y="502.0">CS4B.Messages.JoinChatroom</node>
+    <node x="434.0" y="404.0">CS4B.Messages.StringMessage</node>
+    <node x="0.0" y="404.0">CS4B.Messages.NewChatroom</node>
+    <node x="263.0" y="0.0">CS4B.Messages.Packet</node>
+    <node x="236.0" y="404.0">CS4B.Messages.RequestChatroom</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="203.5" y="199.5" />
+  <SelectedNodes>
+    <node>CS4B.Messages.ConnectionMessageClient</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

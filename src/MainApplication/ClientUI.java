@@ -64,9 +64,9 @@ public class ClientUI extends Application implements Observer {
                     e.printStackTrace();
                 }
             }
-            else if (messageType.equals("OpenChat")){
-                System.out.println("Opening new backend chat");
-                client.startChatroom(((OpenChat)packet.getPacket()).getChatroomName());
+            else if (messageType.equals("OpenChatRequest")){
+                System.out.println("Sending Chatroom Join Request");
+                client.sendChatroomRequest((OpenChatRequest)packet.getPacket());
             }
             else if (messageType.equals("DisconnectAttempt")){
                 if(client != null) {

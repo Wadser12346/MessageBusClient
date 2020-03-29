@@ -3,6 +3,7 @@ package MessageBusFiles;
 import CS4B.Messages.*;
 import MessageBusFiles.InternalWrappers.ConnectionAttempt;
 import MessageBusFiles.InternalWrappers.InternalPacket;
+import MessageBusFiles.InternalWrappers.OpenChatRequest;
 import MessageBusFiles.InternalWrappers.SendMessage;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class Client extends Observable implements Observer, Runnable {
     private ClientPublish publish;
     private ArrayList<ClientChatroom> chatrooms;
     private Socket serverConnection;
+    private String clientName;
     private boolean run;// This is so the disconnect function can set this to true and stop the while loop in run
 
     //TODO: Change to packet when available
@@ -58,7 +60,7 @@ public class Client extends Observable implements Observer, Runnable {
     public void run() {
         run = true;
         //Requesting ChatroomList
-        outgoing.add(new Packet("Client", "N/A", new RequestChatroom(), "RequestChatroomList"));
+        outgoing.add(new Packet(clientName, "N/A", new RequestChatroom(), "RequestChatroomList"));
         while(run){
 
         }
@@ -70,6 +72,11 @@ public class Client extends Observable implements Observer, Runnable {
 
     public void setServerConnection(ConnectionAttempt attempt) throws IOException {
         setServerConnection(attempt.getServerName(), Integer.parseInt(attempt.getPortNumber()));
+    }
+
+    public void sendChatroomRequest(OpenChatRequest openChatRequest){
+        System.out.println("Sending request to open chatroom to server.");
+        outgoing.add(new Packet(clientName, openChatRequest.getChatroomName(), new JoinChatroom(openChatRequest.getChatroomName()), "JoinChatroom"));
     }
 
     public void startChatroom(String chatroomName){
@@ -106,9 +113,15 @@ public class Client extends Observable implements Observer, Runnable {
 
     @Override
     public void update(Observable o, Object arg) {
+        InternalPacket packet = (InternalPacket)arg;
+        if (packet.getPacketType().equals("JoinSuccessful")){
+            startChatroom(((JoinSucessful)(packet.getPacket())).getChatroom());
+        }
+        //Always pass the packet on as there is always a need to update UI
         System.out.println("Passing Packet onto ClientUI");
         setChanged();
         notifyObservers(arg);//Pass it on to ClientUI
+
     }
 
 
