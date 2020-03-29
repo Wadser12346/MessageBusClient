@@ -144,14 +144,14 @@ public class ClientController extends Observable implements Observer {
             Stage stage = new Stage();
             stage.setTitle(chatroomName);
             stage.setScene(new Scene(chatroomWindow, 600, 400));
-            stage.show();
+
             ChatroomController controller = chatroom.getController();
             controller.setChatroomName(chatroomName);
             controller.addObserver(this);
             controller.setUsername(clientName);
             openChats.add(controller);
-            setChanged();
-            notifyObservers(new InternalPacket("OpenChat", new OpenChatRequest(chatroomName)));
+
+            stage.show();
       }
 
       public void displayIncomingMessage(MessageReceived message) throws IOException {

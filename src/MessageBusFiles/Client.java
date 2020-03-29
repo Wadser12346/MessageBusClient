@@ -34,7 +34,8 @@ public class Client extends Observable implements Observer, Runnable {
     private BlockingQueue<Packet> outgoing;
     private BlockingQueue<Packet> incoming;
 
-    public Client(){
+    public Client(String clientName){
+        this.clientName = clientName;
         outgoing = new ArrayBlockingQueue<>(100);
         incoming = new ArrayBlockingQueue<>(100);
         chatrooms = new ArrayList<>();
