@@ -60,7 +60,7 @@ public class Client extends Observable implements Observer, Runnable {
     public void run() {
         run = true;
         //Requesting ChatroomList
-        outgoing.add(new Packet("Client", "N/A", new RequestChatroom(), "RequestChatroomList"));
+        outgoing.add(new Packet(username, "N/A", new RequestChatroom(), "RequestChatroomList"));
         while(run){
 
         }
@@ -81,7 +81,7 @@ public class Client extends Observable implements Observer, Runnable {
     }
 
     public void disconnect(){
-        outgoing.add(new Packet("Client", "N/A", new DisconnectMessageClient(), "DisconnectMessageClient"));
+        outgoing.add(new Packet(username, "N/A", new DisconnectMessageClient(), "DisconnectMessageClient"));
         serverConnection = null;
     }
 
@@ -99,7 +99,12 @@ public class Client extends Observable implements Observer, Runnable {
 
     public void newChatroom(NewChatroom newChatroom) {
         System.out.println("Sending Chatroom Request to Server.");
-        outgoing.add(new Packet("client", "N/A", newChatroom, "NewChatroomRequest"));
+        outgoing.add(new Packet(username, "N/A", newChatroom, "NewChatroomRequest"));
+    }
+
+    public void unJoinChat(UnJoinChatroom unJoinChatroom){
+        System.out.println("Leaving Chatroom: " + unJoinChatroom.getChatroom());
+        outgoing.add(new Packet(username, unJoinChatroom.getChatroom(), unJoinChatroom, "UnJoinChatroom"));
     }
 
     public void test(){

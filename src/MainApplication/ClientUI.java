@@ -2,6 +2,7 @@ package MainApplication;
 
 import CS4B.Messages.ChatroomList;
 import CS4B.Messages.NewChatroom;
+import CS4B.Messages.UnJoinChatroom;
 import MainApplication.Controller.ClientController;
 import MessageBusFiles.*;
 import MessageBusFiles.InternalWrappers.*;
@@ -78,6 +79,10 @@ public class ClientUI extends Application implements Observer {
             else if (messageType.equals("NewChatroom")){
                 System.out.println("Sending NewChatroom to client.");
                 client.newChatroom((NewChatroom) packet.getPacket());
+            }
+            else if(messageType.equals("UnJoinChatroom")){
+                System.out.println("Telling client to close chatroom");
+                client.unJoinChat((UnJoinChatroom)packet.getPacket());
             }
     }
 }

@@ -1,5 +1,6 @@
 package MainApplication.Controller;
 import CS4B.Messages.ChatroomList;
+import CS4B.Messages.UnJoinChatroom;
 import MessageBusFiles.InternalWrappers.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -148,6 +150,17 @@ public class ClientController extends Observable implements Observer {
             openChats.add(controller);
             setChanged();
             notifyObservers(new InternalPacket("OpenChat", new OpenChat(chatroomName)));
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                  @Override
+                  public void handle(WindowEvent event) {
+                        closeChatWindow(chatroomName);
+                  }
+            });
+      }
+
+      private void closeChatWindow(String chatroomName){
+            setChanged();
+            notifyObservers(new InternalPacket("UnJoinChatroom", new UnJoinChatroom(chatroomName)));
       }
 
       public void displayIncomingMessage(MessageReceived message) throws IOException {
